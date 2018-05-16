@@ -1,18 +1,18 @@
-import java.util.Date;
+import java.time.*;
 
 public class AtividadeOrientadaDiscentePosGraduacao {
 	private int codigoDocente;
 	private int matriculaDiscente;
-	private Date dataIngressoDiscente;
+	private LocalDate dataIngressoDiscente; //mudanca pra LocalDate, uma versao melhorada de datas do java 8
 	private String programa;
 	private int cargaHorariaSemanal;
 	
 	
-	public AtividadeOrientadaDiscentePosGraduacao(int codigoDocente, int matriculaDiscente, Date dataIngressoDiscente,
+	public AtividadeOrientadaDiscentePosGraduacao(int codigoDocente, int matriculaDiscente, LocalDate dataIngressoDiscente,
 			String programa, int cargaHorariaSemanal) {
 		this.codigoDocente = codigoDocente;
 		this.matriculaDiscente = matriculaDiscente;
-		this.dataIngressoDiscente = dataIngressoDiscente; // Corrigir funcionamento
+		this.dataIngressoDiscente = dataIngressoDiscente; 
 		this.programa = programa;
 		this.cargaHorariaSemanal = cargaHorariaSemanal;
 	}
@@ -25,7 +25,7 @@ public class AtividadeOrientadaDiscentePosGraduacao {
 		return matriculaDiscente;
 	}
 	
-	public Date getDataIngressoDiscente() {
+	public LocalDate getDataIngressoDiscente() {
 		return dataIngressoDiscente;
 	}
 	
