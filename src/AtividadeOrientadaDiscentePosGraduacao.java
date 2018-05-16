@@ -12,7 +12,7 @@ public class AtividadeOrientadaDiscentePosGraduacao {
 			String programa, int cargaHorariaSemanal) {
 		this.codigoDocente = codigoDocente;
 		this.matriculaDiscente = matriculaDiscente;
-		this.dataIngressoDiscente = dataIngressoDiscente;
+		this.dataIngressoDiscente = dataIngressoDiscente; // Corrigir funcionamento
 		this.programa = programa;
 		this.cargaHorariaSemanal = cargaHorariaSemanal;
 	}
