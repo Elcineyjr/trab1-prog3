@@ -9,7 +9,7 @@ public class csvReader {
 		String[] palavra = null;
 		try{
 			
-			line = br.readLine();
+			if((line = br.readLine()) != null) // corrigir aqui
 				
 			//usa o ; como separador 
 			palavra = line.split(csvSplitBy);
