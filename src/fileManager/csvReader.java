@@ -3,13 +3,16 @@ package fileManager;
 import java.io.*;
 
 public class csvReader {
+	
 	public static String[] leLinhaCSV(BufferedReader br) {
 		String line = "";
 		String csvSplitBy = ";";
 		String[] palavra = null;
-		try{
+		
+		label: try{
 			
-			if((line = br.readLine()) != null) // corrigir aqui
+			if((line = br.readLine()) == null) 
+				break label;
 				
 			//usa o ; como separador 
 			palavra = line.split(csvSplitBy);
@@ -17,5 +20,20 @@ public class csvReader {
 			e.printStackTrace();
 		}
 		return palavra;
+	}
+	
+	public static boolean hasNextLine(BufferedReader br) {
+		String line = "";
+		
+		try {
+			line = br.readLine();
+		}catch(IOException e) {
+			e.printStackTrace();			
+		}
+		
+		if(line == null) 
+			return false;
+		else
+			return true;
 	}
 }
