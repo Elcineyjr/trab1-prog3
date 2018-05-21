@@ -1,18 +1,13 @@
 package fileManager;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class planilhaOrientacaoGrad {
 	
-	public static void lePlanilhaOrientacaoGrad() {
-		
-		String caminho = "C:\\\\Users\\\\Júnior\\\\Desktop\\\\UFES\\\\trab\\\\src\\\\fileManager\\\\teste.csv";
-		
+	public static void lePlanilhaOrientacaoGrad(File arq) {
 		String[] linhaLida = null;
 		
-		try(BufferedReader br = new BufferedReader(new FileReader(caminho))){
+		try(BufferedReader br = new BufferedReader(new FileReader(arq))){
 			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {
 				
 				int codigoDocente = Integer.parseInt(linhaLida[0]);
@@ -30,6 +25,7 @@ public class planilhaOrientacaoGrad {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
+		System.out.println("-------------------------------------");
 	}
 	
 }

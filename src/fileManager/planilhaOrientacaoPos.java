@@ -4,12 +4,9 @@ import java.io.*;
 
 public class planilhaOrientacaoPos {
 
-	public static void lePlanilhaOrientacaoPos() {
-		
-		String caminho = "C:\\\\Users\\\\Júnior\\\\Desktop\\\\UFES\\\\trab\\\\src\\\\fileManager\\\\teste.csv";
-		
+	public static void lePlanilhaOrientacaoPos(File arq) {
 		String[] linhaLida = null;
-		try(BufferedReader br = new BufferedReader(new FileReader(caminho))){
+		try(BufferedReader br = new BufferedReader(new FileReader(arq))){
 			while( (linhaLida = csvReader.leLinhaCSV(br)) != null ) {
 				
 				int codigoDocente = Integer.parseInt(linhaLida[0]);
@@ -29,6 +26,7 @@ public class planilhaOrientacaoPos {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("-------------------------------------");
 				
 	}
 }

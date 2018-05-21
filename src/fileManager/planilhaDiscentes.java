@@ -4,12 +4,9 @@ import java.io.*;
 
 public class planilhaDiscentes {
 
-	public static void lePlanilhaDiscentes(/*receber arquivo como parametro*/) {
-		
-		String caminho = "C:\\Users\\Júnior\\Desktop\\UFES\\trab\\src\\fileManager\\teste.csv";
-		
+	public static void lePlanilhaDiscentes(File arq) {
 		String[] linhaLida = null;
-		try(BufferedReader br = new BufferedReader(new FileReader(caminho))){	//abre arquivo
+		try(BufferedReader br = new BufferedReader(new FileReader(arq))){	//abre arquivo
 			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha 
 				
 				//matricula nao pode exceder o max int value
@@ -25,5 +22,6 @@ public class planilhaDiscentes {
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("-------------------------------------");
 	}
 }

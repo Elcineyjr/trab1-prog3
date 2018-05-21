@@ -1,19 +1,13 @@
 package fileManager;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class planilhaDocentes {
 
 	
-	public static void lePlanilhaDocentes() {
-		
-		//TODO receber o arquivo como parametro
-		String caminho = "C:\\Users\\Júnior\\Desktop\\UFES\\trab\\src\\fileManager\\teste.csv";
-		
+	public static void lePlanilhaDocentes(File arq) {	
 		String[] linhaLida = null;
-		try(BufferedReader br = new BufferedReader(new FileReader(caminho))){	//abre arquivo
+		try(BufferedReader br = new BufferedReader(new FileReader(arq))){	//abre arquivo
 			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha 
 				
 				//converte o codigo lido pra inteiro
@@ -28,6 +22,7 @@ public class planilhaDocentes {
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("-------------------------------------");
 	}
 
 	

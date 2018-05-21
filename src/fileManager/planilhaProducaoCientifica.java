@@ -4,12 +4,9 @@ import java.io.*;
 
 public class planilhaProducaoCientifica {
 	
-	public static void lePlanilhaProducaoCientifica(/*receber arquivo como parametro*/) {
-		
-		String caminho = "C:\\Users\\Júnior\\Desktop\\UFES\\trab\\src\\fileManager\\teste.csv";
-		
+	public static void lePlanilhaProducaoCientifica(File arq) {
 		String[] linhaLida = null;
-		try(BufferedReader br = new BufferedReader(new FileReader(caminho))){	//abre arquivo
+		try(BufferedReader br = new BufferedReader(new FileReader(arq))){	//abre arquivo
 			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha 
 				
 				//converte o codigo lido pra inteiro
@@ -27,5 +24,6 @@ public class planilhaProducaoCientifica {
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("-------------------------------------");
 	}
 }

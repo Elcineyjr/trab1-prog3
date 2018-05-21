@@ -4,12 +4,9 @@ import java.io.*;
 
 public class planilhaDisciplinas {
 
-	public static void lePlanilhaDisciplinas(/*receber arquivo aqui*/) {
-		
-		String caminho = "C:\\Users\\Júnior\\Desktop\\UFES\\trab\\src\\fileManager\\teste.csv";
-		
+	public static void lePlanilhaDisciplinas(File arq) {
 		String[] linhaLida = null;
-		try(BufferedReader br = new BufferedReader(new FileReader(caminho))){	//abre arquivo
+		try(BufferedReader br = new BufferedReader(new FileReader(arq))){	//abre arquivo
 			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha 
 				
 				//codigo alfanumerico da disciplina
@@ -32,5 +29,6 @@ public class planilhaDisciplinas {
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("-------------------------------------");
 	}
 }
