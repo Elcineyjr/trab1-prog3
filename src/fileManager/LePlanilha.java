@@ -13,8 +13,8 @@ import instanciaveis.*;
 public class LePlanilha {
 	private static boolean validadeDosArquivosDeLeitura = true; //variavel para verificar se a leitura de todos os arquivos foi validada, se terminar a leitura dos arquivos com o valor true, significa que não houveram erros na leitura dos arquivos de entrada.
 	
-	public static void setObjects() {
-		
+	public static boolean isValidadeDosArquivosDeLeitura() {
+		return validadeDosArquivosDeLeitura;
 	}
 	
 	public static boolean selectPlanilha(File arq, String flag) {
