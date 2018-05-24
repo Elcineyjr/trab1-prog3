@@ -1,3 +1,4 @@
+package instanciaveis;
 
 public class AtividadeOrientadaDiscenteGraduacao {
 	private int codigoDoDocente;

@@ -1,3 +1,4 @@
+package instanciaveis;
 
 public class Curso {
 	private int codigo;

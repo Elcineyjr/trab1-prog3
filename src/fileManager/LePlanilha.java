@@ -4,59 +4,106 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+import instanciaveis.*;
+
 
 public class LePlanilha {
+	private static boolean validadeDosArquivosDeLeitura = true; //variavel para verificar se a leitura de todos os arquivos foi validada, se terminar a leitura dos arquivos com o valor true, significa que não houveram erros na leitura dos arquivos de entrada.
 	
-	public static void selectPlanilha(File arq, String flag) {
-		switch(flag) {
-		case "-d":
-			lePlanilhaDocentes(arq);
-			break;
-		case "-a":
-			lePlanilhaDiscentes(arq);
-			break;
-		case "-p":
-			lePlanilhaProducaoCientifica(arq);
-			break;
-		case "-c":
-			lePlanilhaCursos(arq);
-			break;
-		case "-r":
-			lePlanilhaDisciplinas(arq);
-			break;
-		case "-og":
-			lePlanilhaOrientacaoGrad(arq);
-			break;
-		case "-op":
-			lePlanilhaOrientacaoPos(arq);
-			break;
-		}
+	public static void setObjects() {
+		
 	}
 	
-	public static void lePlanilhaDiscentes(File arq) {
+	public static boolean selectPlanilha(File arq, String flag) {
+		try {
+			
+			switch(flag) {
+			case "-d":
+				ArrayList<Docente> docentes = lePlanilhaDocentes(arq);
+				for (Docente professor: docentes) {
+					System.out.println(professor);
+				}
+				break;
+			case "-a":
+				ArrayList<Discente> discentes = lePlanilhaDiscentes(arq);
+				for (Discente aluno: discentes) {
+					System.out.println(aluno);
+				}
+				break;
+			case "-p":
+				ArrayList<ProducaoCientifica> producoes = lePlanilhaProducaoCientifica(arq);
+				for (ProducaoCientifica producaoCientifica : producoes) {
+					System.out.println(producaoCientifica);
+				}
+				break;
+			case "-c":
+				ArrayList<Curso> cursos = lePlanilhaCursos(arq);
+				for (Curso curso : cursos) {
+					System.out.println(curso);
+				}
+				break;
+			case "-r":
+				ArrayList<Disciplina> disciplinas = lePlanilhaDisciplinas(arq);
+				for (Disciplina disciplina : disciplinas) {
+					System.out.println(disciplina);
+				}
+				break;
+			case "-og":
+				ArrayList<AtividadeOrientadaDiscenteGraduacao> atividadesGrad = lePlanilhaOrientacaoGrad(arq);
+				for (AtividadeOrientadaDiscenteGraduacao atividadeOrientadaDiscenteGraduacao : atividadesGrad) {
+					System.out.println(atividadeOrientadaDiscenteGraduacao);
+				}
+				break;
+			case "-op":
+				ArrayList<AtividadeOrientadaDiscentePosGraduacao> atividadesPosGrad = lePlanilhaOrientacaoPos(arq);
+				for (AtividadeOrientadaDiscentePosGraduacao atividadeOrientadaDiscentePosGraduacao : atividadesPosGrad) {
+					System.out.println(atividadeOrientadaDiscentePosGraduacao);
+				}
+				break;
+			}
+		}
+		catch(NumberFormatException e) {
+			System.out.println("Erro de formatação");
+			validadeDosArquivosDeLeitura = false;
+		}
+		catch(IOException e) {
+			System.out.println("Erro de I/O");
+			validadeDosArquivosDeLeitura = false;
+		}
+		return validadeDosArquivosDeLeitura;
+	}
+	
+	public static ArrayList<Discente> lePlanilhaDiscentes(File arq)throws NumberFormatException, IOException {
+		ArrayList<Discente> alunos = new ArrayList<Discente>();
 		String[] linhaLida = null;
-		try(BufferedReader br = new BufferedReader(new FileReader(arq))){	//abre arquivo
+			BufferedReader br = new BufferedReader(new FileReader(arq)); //abre arquivo
 			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha 
 				
 				//matricula nao pode exceder o max int value
 				//converte o codigo lido pra inteiro
-				int matricula = Integer.parseInt(linhaLida[0]);
+					int matricula = Integer.parseInt(linhaLida[0]);					
+					String nome = linhaLida[1];
+					int codigoDoCurso = Integer.parseInt(linhaLida[2]);
+					
+					//instancia objeto
+					Discente aluno = new Discente(matricula, nome, codigoDoCurso);
+					
+					alunos.add(aluno);
+					//printa pra teste
+//					System.out.println(matricula + "\n" + nome + "\n" + codigoDoCurso + "\n");
 				
-				String nome = linhaLida[1];
-				int codigoCurso = Integer.parseInt(linhaLida[2]);
-				
-				//printa pra teste
-				System.out.println(matricula + "\n" + nome + "\n" + codigoCurso + "\n");
 			}
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
-		System.out.println("-------------------------------------");
+		return alunos;
+//		System.out.println("-------------------------------------");
 	}
 	
-	public static void lePlanilhaCursos(File arq) {
+	public static ArrayList<Curso> lePlanilhaCursos(File arq)throws NumberFormatException, IOException {
 		String[] linhaLida = null;
-		try(BufferedReader br = new BufferedReader(new FileReader(arq))){	//abre arquivo
+		ArrayList<Curso> cursos = new ArrayList<Curso>();
+		BufferedReader br = new BufferedReader(new FileReader(arq)); //abre arquivo
 			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha  
 				
 				//converte o codigo lido pra inteiro
@@ -73,19 +120,21 @@ public class LePlanilha {
 //				
 //				char pos = linhaLida[3].charAt(0); 
 //				
-				
+				//instancia objeto
+				Curso curso = new Curso(codigoCurso, nome);
+				cursos.add(curso);
 				//printa pra teste
-				System.out.println(codigoCurso + "\n" + nome + "\n");
+//				System.out.println(codigoCurso + "\n" + nome + "\n");
 			}
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
-		System.out.println("-------------------------------------");
+			return cursos;
+
+//		System.out.println("-------------------------------------");
 	}
 	
-	public static void lePlanilhaDocentes(File arq) {	
+	public static ArrayList<Docente> lePlanilhaDocentes(File arq) throws NumberFormatException, IOException{	
 		String[] linhaLida = null;
-		try(BufferedReader br = new BufferedReader(new FileReader(arq))){	//abre arquivo
+		ArrayList<Docente> docentes = new ArrayList<Docente>();
+		BufferedReader br = new BufferedReader(new FileReader(arq));//abre arquivo
 			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha 
 				
 				//converte o codigo lido pra inteiro
@@ -94,42 +143,44 @@ public class LePlanilha {
 				String nome = linhaLida[1];
 				String departamento = linhaLida[2];
 				
+				//instancia o objeto
+				Docente docente = new Docente(codigo, nome, departamento);
+				docentes.add(docente);
 				//printa pra teste
-				System.out.println(codigo + "\n" + nome + "\n" + departamento + "\n");
+//				System.out.println(codigo + "\n" + nome + "\n" + departamento + "\n");
 			}
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
-		System.out.println("-------------------------------------");
+			return docentes;
+//		System.out.println("-------------------------------------");
 	}
 	
-	public static void lePlanilhaOrientacaoGrad(File arq) {
+	public static ArrayList<AtividadeOrientadaDiscenteGraduacao> lePlanilhaOrientacaoGrad(File arq) throws NumberFormatException, IOException{
 		String[] linhaLida = null;
-		
-		try(BufferedReader br = new BufferedReader(new FileReader(arq))){
+		ArrayList<AtividadeOrientadaDiscenteGraduacao> atividadesGrad = new ArrayList<AtividadeOrientadaDiscenteGraduacao>();
+			BufferedReader br = new BufferedReader(new FileReader(arq));
 			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {
 				
-				int codigoDocente = Integer.parseInt(linhaLida[0]);
+				int codigoDoDocente = Integer.parseInt(linhaLida[0]);
 				
 				//matricula nao pode exceder o max int value
-				int matriculaDiscente = Integer.parseInt(linhaLida[1]);
+				int matriculaDoDiscente = Integer.parseInt(linhaLida[1]);
 				
-				int codigoCursoDiscente = Integer.parseInt(linhaLida[2]);
+				int codigoDoCursoDiscente = Integer.parseInt(linhaLida[2]);
 				
-				int cargaHorariaSemananal = Integer.parseInt(linhaLida[3]);
+				int cargaHorariaSemanal = Integer.parseInt(linhaLida[3]);
 				
+				AtividadeOrientadaDiscenteGraduacao grad = new AtividadeOrientadaDiscenteGraduacao(codigoDoDocente, matriculaDoDiscente, codigoDoCursoDiscente, cargaHorariaSemanal);
+				atividadesGrad.add(grad);
 				//printa pra teste
-				System.out.println(codigoDocente + "\n" + matriculaDiscente + "\n" + codigoCursoDiscente + "\n" + cargaHorariaSemananal + "\n");
+//				System.out.println(codigoDocente + "\n" + matriculaDiscente + "\n" + codigoCursoDiscente + "\n" + cargaHorariaSemananal + "\n");
 			}
-		}catch(IOException e){
-			e.printStackTrace();
-		}
-		System.out.println("-------------------------------------");
+			return atividadesGrad;
+//		System.out.println("-------------------------------------");
 	}
 	
-	public static void lePlanilhaDisciplinas(File arq) {
+	public static ArrayList<Disciplina> lePlanilhaDisciplinas(File arq) throws NumberFormatException, IOException {
 		String[] linhaLida = null;
-		try(BufferedReader br = new BufferedReader(new FileReader(arq))){	//abre arquivo
+		ArrayList<Disciplina> disciplinas = new ArrayList<Disciplina>();
+			BufferedReader br = new BufferedReader(new FileReader(arq)); // abre arquivo
 			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha 
 				
 				//codigo alfanumerico da disciplina
@@ -146,18 +197,20 @@ public class LePlanilha {
 				
 				int codigoCurso = Integer.parseInt(linhaLida[5]);
 				
+				Disciplina disciplina = new Disciplina(codigoDisciplina, nomeDisciplina, codigoDocente, cargaHorariaSemanal, cargaHorariaSemestral, codigoCurso);
+				disciplinas.add(disciplina);
 				//printa pra teste
-				System.out.println(codigoDisciplina + "\n" + nomeDisciplina + "\n" + codigoDocente + "\n" + cargaHorariaSemanal + "\n" + cargaHorariaSemestral + "\n" + codigoCurso + "\n");
-			}
-		}catch (IOException e) {
-			e.printStackTrace();
+//				System.out.println(codigoDisciplina + "\n" + nomeDisciplina + "\n" + codigoDocente + "\n" + cargaHorariaSemanal + "\n" + cargaHorariaSemestral + "\n" + codigoCurso + "\n");
+
 		}
-		System.out.println("-------------------------------------");
+//		System.out.println("-------------------------------------");
+			return disciplinas;
 	}
 	
-	public static void lePlanilhaOrientacaoPos(File arq) {
+	public static ArrayList<AtividadeOrientadaDiscentePosGraduacao> lePlanilhaOrientacaoPos(File arq) throws NumberFormatException, IOException{
 		String[] linhaLida = null;
-		try(BufferedReader br = new BufferedReader(new FileReader(arq))){
+		ArrayList<AtividadeOrientadaDiscentePosGraduacao> atividadesPos = new ArrayList<AtividadeOrientadaDiscentePosGraduacao>();
+		BufferedReader br = new BufferedReader(new FileReader(arq)); //abre arquivo
 			while( (linhaLida = csvReader.leLinhaCSV(br)) != null ) {
 				
 				int codigoDocente = Integer.parseInt(linhaLida[0]);
@@ -165,25 +218,30 @@ public class LePlanilha {
 				//matricula nao pode exceder o max int value
 				int matriculaDiscente = Integer.parseInt(linhaLida[1]); 
 				
-				//TODO parsing da data do ingresso do discente
+				//TODO parsing da data do ingresso do discente e ajustar index
+				LocalDate dataIngressoDiscente = LocalDate.of(1996, 12, 02);
 				
 				String programa = linhaLida[2];
 				
 				int cargaSemanal = Integer.parseInt(linhaLida[3]);
 				
+				//instancia o objeto
+				AtividadeOrientadaDiscentePosGraduacao posGrad = new AtividadeOrientadaDiscentePosGraduacao(codigoDocente, matriculaDiscente, dataIngressoDiscente, programa, cargaSemanal);
+				atividadesPos.add(posGrad);
 				//print pra teste
-				System.out.println(codigoDocente + "\n" + matriculaDiscente + "\n" + programa + "\n" + cargaSemanal + "\n");
+//				System.out.println(codigoDocente + "\n" + matriculaDiscente + "\n" + programa + "\n" + cargaSemanal + "\n");
 			}
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
-		System.out.println("-------------------------------------");
+			return atividadesPos;
+//		System.out.println("-------------------------------------");
 				
 	}
 	
-	public static void lePlanilhaProducaoCientifica(File arq) {
+	public static ArrayList<ProducaoCientifica> lePlanilhaProducaoCientifica(File arq) throws NumberFormatException, IOException{
 		String[] linhaLida = null;
-		try(BufferedReader br = new BufferedReader(new FileReader(arq))){	//abre arquivo
+		ArrayList<ProducaoCientifica> producoes = new ArrayList<ProducaoCientifica>();
+		//try(BufferedReader br = new BufferedReader(new FileReader(arq))){	//abre arquivo
+			BufferedReader br = new BufferedReader(new FileReader(arq));
+		
 			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha 
 				
 				//converte o codigo lido pra inteiro
@@ -193,15 +251,17 @@ public class LePlanilha {
 				
 				//TODO verificar se nao foi digitado mais de um char ou outra letra sem ser X
 				//csv deve ter campo vazio se nao for qualificada?
-				char qualificado = linhaLida[2].charAt(0); 
-				
+//				char qualificado = linhaLida[2].charAt(0); 
+				boolean qualificado = true;
+
+				//instancia objeto
+				ProducaoCientifica prod = new ProducaoCientifica(codigoDocente, titulo, qualificado);
+				producoes.add(prod);
 				//printa pra teste
-				System.out.println(codigoDocente + "\n" + titulo + "\n" + qualificado + "\n");
+//				System.out.println(codigoDocente + "\n" + titulo + "\n" + qualificado + "\n");
 			}
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
-		System.out.println("-------------------------------------");
+			return producoes;
+//		System.out.println("-------------------------------------");
 	}
 	
 }
