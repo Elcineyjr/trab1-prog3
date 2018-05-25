@@ -12,7 +12,7 @@ import instanciaveis.*;
 
 
 public class LePlanilha {
-	private static boolean validadeDosArquivosDeLeitura = true; //variavel para verificar se a leitura de todos os arquivos foi validada, se terminar a leitura dos arquivos com o valor true, significa que não houveram erros na leitura dos arquivos de entrada.
+	private static boolean validadeDosArquivosDeLeitura = true; //variavel para verificar se a leitura de todos os arquivos foi validada, se terminar a leitura dos arquivos com o valor true, significa que nï¿½o houveram erros na leitura dos arquivos de entrada.
 	
 	public static boolean isValidadeDosArquivosDeLeitura() {
 		return validadeDosArquivosDeLeitura;
@@ -67,7 +67,7 @@ public class LePlanilha {
 			}
 		}
 		catch(NumberFormatException e) {
-			System.out.println("Erro de formatação");
+			System.out.println("Erro de formataï¿½ï¿½o");
 			validadeDosArquivosDeLeitura = false;
 		}
 		catch(IOException e) {
@@ -102,20 +102,21 @@ public class LePlanilha {
 	}
 	
 	public static ArrayList<Curso> lePlanilhaCursos(File arq)throws NumberFormatException, IOException {
-		String[] linhaLida = null;
+		String[] linhaLida = new String[4];
 		ArrayList<Curso> cursos = new ArrayList<Curso>();
 		BufferedReader br = new BufferedReader(new FileReader(arq)); //abre arquivo
 			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha  
-				
 				//converte o codigo lido pra inteiro
 				int codigoCurso = Integer.parseInt(linhaLida[0]);
 				
 				String nome = linhaLida[1];
-				
+
+				//TODO verificar caso nulo
+//				System.out.println(linhaLida[2] + linhaLida[3]);
 				boolean grad = verificaCheckbox(linhaLida[2]);
 				boolean pos = verificaCheckbox(linhaLida[3]);
 				
-				if ((grad ^ pos) == false) { //circunflexo é um xor 
+				if ((grad ^ pos) == false) { //circunflexo ï¿½ um xor 
 					//TODO erro de insconsistencia no nivel do curso
 				}
 				
@@ -256,8 +257,10 @@ public class LePlanilha {
 				
 				String titulo = linhaLida[1];
 				
-				 
-				boolean qualificado = verificaCheckbox(linhaLida[2]);
+				boolean qualificado;
+				if (linhaLida.length == 3)
+					qualificado = verificaCheckbox(linhaLida[2]);
+				qualificado = false;
 
 				//instancia objeto
 				ProducaoCientifica prod = new ProducaoCientifica(codigoDocente, titulo, qualificado);
@@ -270,8 +273,14 @@ public class LePlanilha {
 	}
 	
 	
-	
 	public static boolean verificaCheckbox (String s) {
+		char[] array = s.toCharArray();
+		if(array.length > 1)
+			System.out.println("erro de formataÃ§ao");			
+		else
+			if(s.equalsIgnoreCase("x") == false)
+				System.out.println("erro de formataÃ§ao");		
+		
 		return s.equalsIgnoreCase("x");
 	}
 	
