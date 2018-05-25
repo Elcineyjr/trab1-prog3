@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import instanciaveis.*;
@@ -111,17 +112,22 @@ public class LePlanilha {
 				
 				String nome = linhaLida[1];
 				
-				//TODO terminar isso
-//				//TODO verificar se nao foi digitado mais de um char ou outra letra sem ser X
-//				if (linhaLida[2] != null) {
-//					
-//					char graduacao = linhaLida[2].charAt(0);
-//				}
-//				
-//				char pos = linhaLida[3].charAt(0); 
-//				
+				boolean grad = verificaCheckbox(linhaLida[2]);
+				boolean pos = verificaCheckbox(linhaLida[3]);
+				
+				if ((grad ^ pos) == false) { //circunflexo é um xor 
+					//TODO erro de insconsistencia no nivel do curso
+				}
+				
+				
+				int tipoCurso;
+				if(grad)
+					tipoCurso = 0;
+				else
+					tipoCurso = 1;
+				
 				//instancia objeto
-				Curso curso = new Curso(codigoCurso, nome);
+				Curso curso = new Curso(codigoCurso, nome, tipoCurso);
 				cursos.add(curso);
 				//printa pra teste
 //				System.out.println(codigoCurso + "\n" + nome + "\n");
@@ -218,12 +224,13 @@ public class LePlanilha {
 				//matricula nao pode exceder o max int value
 				int matriculaDiscente = Integer.parseInt(linhaLida[1]); 
 				
-				//TODO parsing da data do ingresso do discente e ajustar index
-				LocalDate dataIngressoDiscente = LocalDate.of(1996, 12, 02);
+				DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 				
-				String programa = linhaLida[2];
+				LocalDate dataIngressoDiscente = LocalDate.parse(linhaLida[2], formatador);
 				
-				int cargaSemanal = Integer.parseInt(linhaLida[3]);
+				String programa = linhaLida[3];
+				
+				int cargaSemanal = Integer.parseInt(linhaLida[4]);
 				
 				//instancia o objeto
 				AtividadeOrientadaDiscentePosGraduacao posGrad = new AtividadeOrientadaDiscentePosGraduacao(codigoDocente, matriculaDiscente, dataIngressoDiscente, programa, cargaSemanal);
@@ -249,10 +256,8 @@ public class LePlanilha {
 				
 				String titulo = linhaLida[1];
 				
-				//TODO verificar se nao foi digitado mais de um char ou outra letra sem ser X
-				//csv deve ter campo vazio se nao for qualificada?
-//				char qualificado = linhaLida[2].charAt(0); 
-				boolean qualificado = true;
+				 
+				boolean qualificado = verificaCheckbox(linhaLida[2]);
 
 				//instancia objeto
 				ProducaoCientifica prod = new ProducaoCientifica(codigoDocente, titulo, qualificado);
@@ -262,6 +267,12 @@ public class LePlanilha {
 			}
 			return producoes;
 //		System.out.println("-------------------------------------");
+	}
+	
+	
+	
+	public static boolean verificaCheckbox (String s) {
+		return s.equalsIgnoreCase("x");
 	}
 	
 }

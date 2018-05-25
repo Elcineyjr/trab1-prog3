@@ -1,13 +1,17 @@
 package instanciaveis;
 
 public class Curso {
+	private static final int GRAD = 0;
+	private static final int POS = 1;
 	private int codigo;
 	private String nome;
+	private int tipoCurso;
 	
 	
-	public Curso(int codigo, String nome) {
+	public Curso(int codigo, String nome, int tipoCurso) {
 		this.codigo = codigo;
 		this.nome = nome;
+		this.tipoCurso = tipoCurso;
 	}
 
 	public int getCodigo() {
@@ -18,9 +22,15 @@ public class Curso {
 		return nome;
 	}
 	
+	public int getTipoCurso() {
+		return tipoCurso;
+	}
+
 	@Override
 	public String toString() {
-		return "Curso [codigo=" + this.codigo +  ", nome=" + this.nome + "]";
+		if(this.tipoCurso == GRAD)
+			return "Curso [codigo=" + this.codigo +  ", nome=" + this.nome + ", tipo de curso=Graduaçao" + "]";
+		return "Curso [codigo=" + this.codigo +  ", nome=" + this.nome + ", tipo de curso=Pos-Graduaçao" + "]";
 		
 	}
 	

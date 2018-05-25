@@ -1,5 +1,6 @@
 package instanciaveis;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 public class AtividadeOrientadaDiscentePosGraduacao {
 	private int codigoDocente;
@@ -8,6 +9,7 @@ public class AtividadeOrientadaDiscentePosGraduacao {
 	private String programa;
 	private int cargaHorariaSemanal;
 	
+	DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	public AtividadeOrientadaDiscentePosGraduacao(int codigoDocente, int matriculaDiscente, LocalDate dataIngressoDiscente,
 			String programa, int cargaHorariaSemanal) {
@@ -41,7 +43,7 @@ public class AtividadeOrientadaDiscentePosGraduacao {
 	@Override
 	public String toString() {
 		return "AtividadeOrientadaDiscentePosGraduacao [codigoDocente=" + codigoDocente + ", matriculaDiscente="
-				+ matriculaDiscente + ", dataIngressoDiscente=" + dataIngressoDiscente + ", programa=" + programa
+				+ matriculaDiscente + ", dataIngressoDiscente=" + formatador.format(dataIngressoDiscente) + ", programa=" + programa
 				+ ", cargaHorariaSemanal=" + cargaHorariaSemanal + "]";
 	}
 	
