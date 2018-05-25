@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import exceptionManager.InconsistencyException;
 
 import instanciaveis.*;
 
@@ -18,7 +19,7 @@ public class LePlanilha {
 		return validadeDosArquivosDeLeitura;
 	}
 	
-	public static boolean selectPlanilha(File arq, String flag) {
+	public static boolean selectPlanilha(File arq, String flag) throws InconsistencyException {
 		try {
 			
 			switch(flag) {
@@ -67,7 +68,7 @@ public class LePlanilha {
 			}
 		}
 		catch(NumberFormatException e) {
-			System.out.println("Erro de formata��o");
+			System.out.println("Erro de formatacao");
 			validadeDosArquivosDeLeitura = false;
 		}
 		catch(IOException e) {
@@ -101,8 +102,10 @@ public class LePlanilha {
 //		System.out.println("-------------------------------------");
 	}
 	
-	public static ArrayList<Curso> lePlanilhaCursos(File arq)throws NumberFormatException, IOException {
+
+	public static ArrayList<Curso> lePlanilhaCursos(File arq)throws NumberFormatException, IOException, InconsistencyException {
 		String[] linhaLida = new String[4];
+
 		ArrayList<Curso> cursos = new ArrayList<Curso>();
 		BufferedReader br = new BufferedReader(new FileReader(arq)); //abre arquivo
 			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha  
@@ -116,8 +119,11 @@ public class LePlanilha {
 				boolean grad = verificaCheckbox(linhaLida[2]);
 				boolean pos = verificaCheckbox(linhaLida[3]);
 				
-				if ((grad ^ pos) == false) { //circunflexo � um xor 
+
+				if ((grad ^ pos) == false) { //circunflexo ^ um xor 
+
 					//TODO erro de insconsistencia no nivel do curso
+					throw new InconsistencyException(codigoCurso, nome);					
 				}
 				
 				
