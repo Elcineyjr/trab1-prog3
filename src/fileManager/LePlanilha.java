@@ -7,75 +7,59 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import exceptionManager.InconsistencyException;
+import exceptionManager.*;
 
 import instanciaveis.*;
 
 
 public class LePlanilha {
-	private static boolean validadeDosArquivosDeLeitura = true; //variavel para verificar se a leitura de todos os arquivos foi validada, se terminar a leitura dos arquivos com o valor true, significa que n�o houveram erros na leitura dos arquivos de entrada.
 	
-	public static boolean isValidadeDosArquivosDeLeitura() {
-		return validadeDosArquivosDeLeitura;
-	}
-	
-	public static boolean selectPlanilha(File arq, String flag) throws InconsistencyException {
-		try {
+	public static void selectPlanilha(File arq, String flag) throws NumberFormatException, IOException,RepeatedCodeException, InvalidCodeException, CourseLevelException, InvalidFutureDateException{
 			
-			switch(flag) {
-			case "-d":
-				ArrayList<Docente> docentes = lePlanilhaDocentes(arq);
-				for (Docente professor: docentes) {
-					System.out.println(professor);
-				}
-				break;
-			case "-a":
-				ArrayList<Discente> discentes = lePlanilhaDiscentes(arq);
-				for (Discente aluno: discentes) {
-					System.out.println(aluno);
-				}
-				break;
-			case "-p":
-				ArrayList<ProducaoCientifica> producoes = lePlanilhaProducaoCientifica(arq);
-				for (ProducaoCientifica producaoCientifica : producoes) {
-					System.out.println(producaoCientifica);
-				}
-				break;
-			case "-c":
-				ArrayList<Curso> cursos = lePlanilhaCursos(arq);
-				for (Curso curso : cursos) {
-					System.out.println(curso);
-				}
-				break;
-			case "-r":
-				ArrayList<Disciplina> disciplinas = lePlanilhaDisciplinas(arq);
-				for (Disciplina disciplina : disciplinas) {
-					System.out.println(disciplina);
-				}
-				break;
-			case "-og":
-				ArrayList<AtividadeOrientadaDiscenteGraduacao> atividadesGrad = lePlanilhaOrientacaoGrad(arq);
-				for (AtividadeOrientadaDiscenteGraduacao atividadeOrientadaDiscenteGraduacao : atividadesGrad) {
-					System.out.println(atividadeOrientadaDiscenteGraduacao);
-				}
-				break;
-			case "-op":
-				ArrayList<AtividadeOrientadaDiscentePosGraduacao> atividadesPosGrad = lePlanilhaOrientacaoPos(arq);
-				for (AtividadeOrientadaDiscentePosGraduacao atividadeOrientadaDiscentePosGraduacao : atividadesPosGrad) {
-					System.out.println(atividadeOrientadaDiscentePosGraduacao);
-				}
-				break;
+		switch(flag) {
+		case "-d":
+			ArrayList<Docente> docentes = lePlanilhaDocentes(arq);
+			for (Docente professor: docentes) {
+				System.out.println(professor);
 			}
+			break;
+		case "-a":
+			ArrayList<Discente> discentes = lePlanilhaDiscentes(arq);
+			for (Discente aluno: discentes) {
+				System.out.println(aluno);
+			}
+			break;
+		case "-p":
+			ArrayList<ProducaoCientifica> producoes = lePlanilhaProducaoCientifica(arq);
+			for (ProducaoCientifica producaoCientifica : producoes) {
+				System.out.println(producaoCientifica);
+			}
+			break;
+		case "-c":
+			ArrayList<Curso> cursos = lePlanilhaCursos(arq);
+			for (Curso curso : cursos) {
+				System.out.println(curso);
+			}
+			break;
+		case "-r":
+			ArrayList<Disciplina> disciplinas = lePlanilhaDisciplinas(arq);
+			for (Disciplina disciplina : disciplinas) {
+				System.out.println(disciplina);
+			}
+			break;
+		case "-og":
+			ArrayList<AtividadeOrientadaDiscenteGraduacao> atividadesGrad = lePlanilhaOrientacaoGrad(arq);
+			for (AtividadeOrientadaDiscenteGraduacao atividadeOrientadaDiscenteGraduacao : atividadesGrad) {
+				System.out.println(atividadeOrientadaDiscenteGraduacao);
+			}
+			break;
+		case "-op":
+			ArrayList<AtividadeOrientadaDiscentePosGraduacao> atividadesPosGrad = lePlanilhaOrientacaoPos(arq);
+			for (AtividadeOrientadaDiscentePosGraduacao atividadeOrientadaDiscentePosGraduacao : atividadesPosGrad) {
+				System.out.println(atividadeOrientadaDiscentePosGraduacao);
+			}
+			break;
 		}
-		catch(NumberFormatException e) {
-			System.out.println("Erro de formatacao");
-			validadeDosArquivosDeLeitura = false;
-		}
-		catch(IOException e) {
-			System.out.println("Erro de I/O");
-			validadeDosArquivosDeLeitura = false;
-		}
-		return validadeDosArquivosDeLeitura;
 	}
 	
 	public static ArrayList<Discente> lePlanilhaDiscentes(File arq)throws NumberFormatException, IOException {
@@ -103,7 +87,7 @@ public class LePlanilha {
 	}
 	
 
-	public static ArrayList<Curso> lePlanilhaCursos(File arq)throws NumberFormatException, IOException, InconsistencyException {
+	public static ArrayList<Curso> lePlanilhaCursos(File arq)throws IOException, CourseLevelException {
 		String[] linhaLida = new String[4];
 
 		ArrayList<Curso> cursos = new ArrayList<Curso>();
@@ -116,22 +100,23 @@ public class LePlanilha {
 
 				//TODO verificar caso nulo
 //				System.out.println(linhaLida[2] + linhaLida[3]);
-				boolean grad = verificaCheckbox(linhaLida[2]);
-				boolean pos = verificaCheckbox(linhaLida[3]);
+//				boolean grad = verificaCheckbox(linhaLida[2]);
+//				boolean pos = verificaCheckbox(linhaLida[3]);
+//				
+//
+//				if ((grad ^ pos) == false) { //circunflexo ^ um xor 
+//
+//					//TODO erro de insconsistencia no nivel do curso
+//					throw new CourseLevelException(codigoCurso, nome);					
+//				}
 				
-
-				if ((grad ^ pos) == false) { //circunflexo ^ um xor 
-
-					//TODO erro de insconsistencia no nivel do curso
-					throw new InconsistencyException(codigoCurso, nome);					
-				}
 				
-				
-				int tipoCurso;
-				if(grad)
-					tipoCurso = 0;
-				else
-					tipoCurso = 1;
+//				int tipoCurso;
+//				if(grad)
+//					tipoCurso = 0;
+//				else
+//					tipoCurso = 1;
+				int tipoCurso = 1; //Corrigir isso pq ta dando bastante merda
 				
 				//instancia objeto
 				Curso curso = new Curso(codigoCurso, nome, tipoCurso);
@@ -220,7 +205,7 @@ public class LePlanilha {
 			return disciplinas;
 	}
 	
-	public static ArrayList<AtividadeOrientadaDiscentePosGraduacao> lePlanilhaOrientacaoPos(File arq) throws NumberFormatException, IOException{
+	public static ArrayList<AtividadeOrientadaDiscentePosGraduacao> lePlanilhaOrientacaoPos(File arq) throws NumberFormatException, IOException, InvalidFutureDateException{
 		String[] linhaLida = null;
 		ArrayList<AtividadeOrientadaDiscentePosGraduacao> atividadesPos = new ArrayList<AtividadeOrientadaDiscentePosGraduacao>();
 		BufferedReader br = new BufferedReader(new FileReader(arq)); //abre arquivo

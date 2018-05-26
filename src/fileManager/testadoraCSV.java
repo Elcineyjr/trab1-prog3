@@ -2,7 +2,7 @@ package fileManager;
 
 import java.io.*;
 
-import exceptionManager.InconsistencyException;
+import exceptionManager.*;
 
 public class testadoraCSV {
 
@@ -16,8 +16,15 @@ public class testadoraCSV {
 				LePlanilha.selectPlanilha(arq, args[i]);
 
 			}
-		} catch (InconsistencyException e) {
+		} 
+		catch (RepeatedCodeException | InvalidCodeException | CourseLevelException | InvalidFutureDateException e) {
 			System.out.println(e.getMessage());
+		}
+		catch (NumberFormatException e) {
+			System.out.println("Erro de formatação");
+		}
+		catch (IOException e) {
+			System.out.println("Erro de I/O");
 		}
 	}
 	
