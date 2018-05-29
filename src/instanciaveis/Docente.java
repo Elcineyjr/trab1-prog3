@@ -30,5 +30,8 @@ public class Docente {
 		return "Docente [codigo=" + codigo + ", nome=" + nome + ", departamento=" + departamento + "]";
 	}
 	
-	
+
+	public boolean compareTo(Docente d) {
+		return this.codigo == d.getCodigo();
+	}
 }

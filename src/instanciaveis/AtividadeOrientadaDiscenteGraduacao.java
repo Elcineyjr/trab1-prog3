@@ -35,5 +35,12 @@ public class AtividadeOrientadaDiscenteGraduacao {
 				+ cargaHorariaSemanal + "]";
 	}
 	
+	public boolean compareCodigoDocente(AtividadeOrientadaDiscenteGraduacao a) {
+		return this.codigoDoDocente == a.getCodigoDoDocente();
+	}
+	
+	public boolean compareCodigoCurso(AtividadeOrientadaDiscenteGraduacao a) {
+		return this.codigoDoCurso == a.getcodigoDoCurso();
+	}
 	
 }

@@ -1,4 +1,19 @@
 # trab1-prog3
+
+tabela de erros:
+1-ok
+2-ok (tirar duvida)
+3-TODO
+4-ok
+5-TODO
+6-TODO
+7-TODO
+8-TODO
+9-TODO
+10-TODO
+11-TODO
+
+
 Primeiro trabalho pratico da discioplina Programação 3
 
 Classes de erros:

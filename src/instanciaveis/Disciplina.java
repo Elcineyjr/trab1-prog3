@@ -51,5 +51,8 @@ public class Disciplina {
 				+ cargaHorariaSemestral + ", codigoDoCurso=" + codigoDoCurso + "]";
 	}
 	
+	public boolean compareCodigoDisciplina(Disciplina d) {
+		return this.codigoDaDisciplina.equals(d.getCodigoDaDisciplina());
+	}
 	
 }

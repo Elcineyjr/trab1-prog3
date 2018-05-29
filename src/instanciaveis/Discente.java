@@ -2,17 +2,17 @@ package instanciaveis;
 
 
 public class Discente {
-	private int matricula;
+	private long matricula;
 	private String nome;
 	private int codigoDoCurso;
 	
-	public Discente(int matricula, String nome, int codigoDoCurso) {
+	public Discente(long matricula, String nome, int codigoDoCurso) {
 		this.matricula = matricula;
 		this.nome = nome;
 		this.codigoDoCurso = codigoDoCurso;
 	}
 
-	public int getMatricula() {
+	public long getMatricula() {
 		return matricula;
 	}
 
@@ -29,6 +29,8 @@ public class Discente {
 		return "Discente [matricula=" + matricula + ", nome=" + nome + ", codigoDoCurso=" + codigoDoCurso + "]";
 	}
 	
-	
+	public boolean compareTo(Discente d) {
+		return this.matricula == d.getMatricula();
+	}
 	
 }
