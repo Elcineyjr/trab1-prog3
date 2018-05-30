@@ -1,6 +1,8 @@
 package fileManager;
 
 import java.io.*;
+import java.time.format.DateTimeFormatter;
+import java.time.*;
 
 import exceptionManager.*;
 
@@ -21,7 +23,7 @@ public class testadoraCSV {
 			System.out.println(e.getMessage());
 		}
 		catch (NumberFormatException e) {
-			System.out.println("Erro de formatação");
+			System.out.println("Erro de formataï¿½ï¿½o");
 		}
 		catch (IOException e) {
 			System.out.println("Erro de I/O");

@@ -69,7 +69,7 @@ public class LePlanilha {
 			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha 
 				
 				//matricula nao pode exceder 10 digitos
-				if(linhaLida[0].length() != 10)
+				if(linhaLida[0].length() != 10) //ESSA ERA A DUVIDA
 					throw new NumberFormatException();
 				
 				//converte o codigo lido pra long
@@ -253,9 +253,14 @@ public class LePlanilha {
 				//matricula nao pode exceder o max int value
 				int matriculaDiscente = Integer.parseInt(linhaLida[1]); 
 				
+				//estabalece o formato q a data sera recebida
 				DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 				
 				LocalDate dataIngressoDiscente = LocalDate.parse(linhaLida[2], formatador);
+				
+				//TODO verificar essa parada de pegar o nome do discente
+//				if(dataIngressoDiscente.isAfter(LocalDate.now()) == true)
+//					throw new InvalidFutureDateException(nomeDiscente, dataIngressoDiscente);
 				
 				String programa = linhaLida[3];
 				
@@ -263,7 +268,10 @@ public class LePlanilha {
 				
 				//instancia o objeto
 				AtividadeOrientadaDiscentePosGraduacao posGrad = new AtividadeOrientadaDiscentePosGraduacao(codigoDocente, matriculaDiscente, dataIngressoDiscente, programa, cargaSemanal);
+				
+				//adiciona na lista de atividades de pos graduacao
 				atividadesPos.add(posGrad);
+				
 				//print pra teste
 //				System.out.println(codigoDocente + "\n" + matriculaDiscente + "\n" + programa + "\n" + cargaSemanal + "\n");
 			}
