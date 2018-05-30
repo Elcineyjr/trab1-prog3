@@ -99,29 +99,35 @@ public class LePlanilha {
 		BufferedReader br = new BufferedReader(new FileReader(arq)); //abre arquivo
 			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha  
 				//converte o codigo lido pra inteiro
+				int tipoCurso = 0;
 				int codigoCurso = Integer.parseInt(linhaLida[0]);
 				
 				String nome = linhaLida[1];
-
-				//TODO verificar caso nulo
-//				System.out.println(linhaLida[2] + linhaLida[3]);
-//				boolean grad = verificaCheckbox(linhaLida[2]);
-//				boolean pos = verificaCheckbox(linhaLida[3]);
-//				
-//
-//				if ((grad ^ pos) == false) { //circunflexo ^ um xor 
-//
-//					//TODO erro de insconsistencia no nivel do curso
-//					throw new CourseLevelException(codigoCurso, nome);					
-//				}
 				
+				//testa se possui marcação além da esperada
+				if (linhaLida.length == 2) { //nenhum curso foi marcado
+					throw new CourseLevelException(codigoCurso, nome); 
+				}
 				
-//				int tipoCurso;
-//				if(grad)
-//					tipoCurso = 0;
-//				else
-//					tipoCurso = 1;
-				int tipoCurso = 1; //Corrigir isso pq ta dando bastante merda
+				if(linhaLida.length == 4) { //possivel marcação de duas opções
+					if(linhaLida[2].isEmpty() && linhaLida[3].equalsIgnoreCase("x")) 
+						tipoCurso = 1; // pos graduação 
+					if (linhaLida[2].equalsIgnoreCase("x") && linhaLida[3].isEmpty())
+						tipoCurso = 0; // graduação
+					if (linhaLida[2].equalsIgnoreCase("x") && linhaLida[3].equalsIgnoreCase("x"))
+						throw new CourseLevelException(codigoCurso, nome);
+					if (!linhaLida[2].equalsIgnoreCase("x") && !linhaLida[3].equalsIgnoreCase("x"))
+						throw new CourseLevelException(codigoCurso, nome);
+				}
+				
+						
+				if(linhaLida.length == 3) { // possivel marcação de x apenas em graduação
+					if(!linhaLida[2].equalsIgnoreCase("x")){
+						throw new CourseLevelException(codigoCurso, nome);
+					} else {
+						tipoCurso = 0; //graduação
+					}
+				}				
 				
 				//instancia objeto
 				Curso curso = new Curso(codigoCurso, nome, tipoCurso);
@@ -220,7 +226,7 @@ public class LePlanilha {
 				Disciplina disciplina = new Disciplina(codigoDisciplina, nomeDisciplina, codigoDocente, cargaHorariaSemanal, cargaHorariaSemestral, codigoCurso);
 				
 				//verifica conflitos na disciplina 
-				//TODO ainda falta outras compara�oes
+				//TODO ainda falta outras compara�oes
 				for (Disciplina d : disciplinas) {
 					if(disciplina.compareCodigoDisciplina(d) == true)
 						throw new RepeatedCodeException(codigoDisciplina, disciplina);
