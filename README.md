@@ -10,7 +10,7 @@ tabela de erros:
 7-TODO
 8-TODO
 9-TODO
-10-TODO
+10-ok
 11-TODO
 
 

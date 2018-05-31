@@ -104,16 +104,18 @@ public class LePlanilha {
 				
 				String nome = linhaLida[1];
 				
-				//testa se possui marcaÃ§Ã£o alÃ©m da esperada
+				//testa se não possui marcação
 				if (linhaLida.length == 2) { //nenhum curso foi marcado
 					throw new CourseLevelException(codigoCurso, nome); 
 				}
 				
-				if(linhaLida.length == 4) { //possivel marcaÃ§Ã£o de duas opÃ§Ãµes
+				if(linhaLida.length == 4) { //possivel marcação de duas opções
 					if(linhaLida[2].isEmpty() && linhaLida[3].equalsIgnoreCase("x")) 
-						tipoCurso = 1; // pos graduaÃ§Ã£o 
+						tipoCurso = 1; // pos graduação 
 					if (linhaLida[2].equalsIgnoreCase("x") && linhaLida[3].isEmpty())
-						tipoCurso = 0; // graduaÃ§Ã£o
+						tipoCurso = 0; // graduação
+					if ((!linhaLida[2].isEmpty() && !linhaLida[2].equalsIgnoreCase("x")) || (!linhaLida[3].isEmpty() && !linhaLida[3].equalsIgnoreCase("x")))
+						throw new NumberFormatException();
 					if (linhaLida[2].equalsIgnoreCase("x") && linhaLida[3].equalsIgnoreCase("x"))
 						throw new CourseLevelException(codigoCurso, nome);
 					if (!linhaLida[2].equalsIgnoreCase("x") && !linhaLida[3].equalsIgnoreCase("x"))
@@ -121,11 +123,11 @@ public class LePlanilha {
 				}
 				
 						
-				if(linhaLida.length == 3) { // possivel marcaÃ§Ã£o de x apenas em graduaÃ§Ã£o
+				if(linhaLida.length == 3) { // possivel marcação de x apenas em graduação
 					if(!linhaLida[2].equalsIgnoreCase("x")){
 						throw new CourseLevelException(codigoCurso, nome);
 					} else {
-						tipoCurso = 0; //graduaÃ§Ã£o
+						tipoCurso = 0; //graduação
 					}
 				}				
 				
