@@ -15,55 +15,75 @@ import instanciaveis.*;
 public class LePlanilha {
 	private static ArrayList<Integer> codigosDocentesList;
 	private static ArrayList<Integer> codigosCursosList;
-	private static ArrayList<Discente> discentesList = new ArrayList<Discente>(); 
+	private static ArrayList<Discente> discentesList = new ArrayList<Discente>();
 	
 	
-	public static void selectPlanilha(File arq, String flag) throws NumberFormatException, IOException,RepeatedCodeException, InvalidCodeException, CourseLevelException, InvalidFutureDateException{
-			
-		switch(flag) {
-		case "-d":
-			ArrayList<Docente> docentes = lePlanilhaDocentes(arq);
-			for (Docente professor: docentes) {
-				System.out.println(professor);
-			}
-			break;
-		case "-a":
-			ArrayList<Discente> discentes = lePlanilhaDiscentes(arq);
-			for (Discente aluno: discentes) {
-				System.out.println(aluno);
-			}
-			break;
-		case "-p":
-			ArrayList<ProducaoCientifica> producoes = lePlanilhaProducaoCientifica(arq);
-			for (ProducaoCientifica producaoCientifica : producoes) {
-				System.out.println(producaoCientifica);
-			}
-			break;
-		case "-c":
-			ArrayList<Curso> cursos = lePlanilhaCursos(arq);
-			for (Curso curso : cursos) {
-				System.out.println(curso);
-			}
-			break;
-		case "-r":
-			ArrayList<Disciplina> disciplinas = lePlanilhaDisciplinas(arq);
-			for (Disciplina disciplina : disciplinas) {
-				System.out.println(disciplina);
-			}
-			break;
-		case "-og":
-			ArrayList<AtividadeOrientadaDiscenteGraduacao> atividadesGrad = lePlanilhaOrientacaoGrad(arq);
-			for (AtividadeOrientadaDiscenteGraduacao atividadeOrientadaDiscenteGraduacao : atividadesGrad) {
-				System.out.println(atividadeOrientadaDiscenteGraduacao);
-			}
-			break;
-		case "-op":
-			ArrayList<AtividadeOrientadaDiscentePosGraduacao> atividadesPosGrad = lePlanilhaOrientacaoPos(arq);
-			for (AtividadeOrientadaDiscentePosGraduacao atividadeOrientadaDiscentePosGraduacao : atividadesPosGrad) {
-				System.out.println(atividadeOrientadaDiscentePosGraduacao);
-			}
-			break;
+	public static void selectPlanilha(String[] args) throws NumberFormatException, IOException,RepeatedCodeException, InvalidCodeException, CourseLevelException, InvalidFutureDateException{
+		File arq = null;
+		String flag = null;
+		File[] arquivos = new File[4]; 
+		for(int i = 0; i < args.length; i+= 2) {
+			arq = new File(args[i+1]);
+			flag = args[i];
+
+			switch(flag) {
+			case "-d": //docentes
+				ArrayList<Docente> docentes = lePlanilhaDocentes(arq);
+				for (Docente professor: docentes) {
+					System.out.println(professor);
+				}
+				break;
+			case "-a": // discentes
+				ArrayList<Discente> discentes = lePlanilhaDiscentes(arq);
+				for (Discente aluno: discentes) {
+					System.out.println(aluno);
+				}
+				break;
+			case "-c": //cursos
+				ArrayList<Curso> cursos = lePlanilhaCursos(arq);
+				for (Curso curso : cursos) {
+					System.out.println(curso);
+				}
+				break;
+			case "-p": // producoes
+				arquivos[0] = arq;
+				break;
+			case "-r": //disciplinas
+				arquivos[1] = arq;
+				break;
+			case "-og": //Orientação Grad
+				arquivos[2] = arq;
+				break;
+			case "-op": //Orientação Pos Grad
+				arquivos[3] = arq;
+				break;
+			}			
 		}
+		
+		//producoes
+		ArrayList<ProducaoCientifica> producoes = lePlanilhaProducaoCientifica(arquivos[0]);
+		for (ProducaoCientifica producaoCientifica : producoes) {
+			System.out.println(producaoCientifica);
+		}
+		
+		//disciplinas
+		ArrayList<Disciplina> disciplinas = lePlanilhaDisciplinas(arquivos[1]);
+		for (Disciplina disciplina : disciplinas) {
+			System.out.println(disciplina);
+		}
+		
+		//Orientação Grad
+		ArrayList<AtividadeOrientadaDiscenteGraduacao> atividadesGrad = lePlanilhaOrientacaoGrad(arquivos[2]);
+		for (AtividadeOrientadaDiscenteGraduacao atividadeOrientadaDiscenteGraduacao : atividadesGrad) {
+			System.out.println(atividadeOrientadaDiscenteGraduacao);
+		}
+		
+		//Orientação Pos Grad
+		ArrayList<AtividadeOrientadaDiscentePosGraduacao> atividadesPosGrad = lePlanilhaOrientacaoPos(arquivos[3]);
+		for (AtividadeOrientadaDiscentePosGraduacao atividadeOrientadaDiscentePosGraduacao : atividadesPosGrad) {
+			System.out.println(atividadeOrientadaDiscentePosGraduacao);
+		}
+		
 	}
 	
 	public static ArrayList<Discente> lePlanilhaDiscentes(File arq)throws NumberFormatException, IOException, RepeatedCodeException {
