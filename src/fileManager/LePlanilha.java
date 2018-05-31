@@ -104,16 +104,16 @@ public class LePlanilha {
 				
 				String nome = linhaLida[1];
 				
-				//testa se não possui marcação
+				//testa se nao possui marcacao
 				if (linhaLida.length == 2) { //nenhum curso foi marcado
 					throw new CourseLevelException(codigoCurso, nome); 
 				}
 				
-				if(linhaLida.length == 4) { //possivel marcação de duas opções
+				if(linhaLida.length == 4) { //possivel marcacao de duas opcoes
 					if(linhaLida[2].isEmpty() && linhaLida[3].equalsIgnoreCase("x")) 
-						tipoCurso = 1; // pos graduação 
+						tipoCurso = 1; // pos graduacao 
 					if (linhaLida[2].equalsIgnoreCase("x") && linhaLida[3].isEmpty())
-						tipoCurso = 0; // graduação
+						tipoCurso = 0; // graduacao
 					if ((!linhaLida[2].isEmpty() && !linhaLida[2].equalsIgnoreCase("x")) || (!linhaLida[3].isEmpty() && !linhaLida[3].equalsIgnoreCase("x")))
 						throw new NumberFormatException();
 					if (linhaLida[2].equalsIgnoreCase("x") && linhaLida[3].equalsIgnoreCase("x"))
@@ -122,24 +122,20 @@ public class LePlanilha {
 						throw new CourseLevelException(codigoCurso, nome);
 				}
 				
-						
-				if(linhaLida.length == 3) { // possivel marcação de x apenas em graduação
+
+				if(linhaLida.length == 3) { // possivel marcacao de x apenas em graduacao
 					if(!linhaLida[2].equalsIgnoreCase("x")){
 						throw new CourseLevelException(codigoCurso, nome);
 					} else {
-						tipoCurso = 0; //graduação
+						tipoCurso = 0; //graduacao
 					}
 				}				
 				
 				//instancia objeto
 				Curso curso = new Curso(codigoCurso, nome, tipoCurso);
 				cursos.add(curso);
-				//printa pra teste
-//				System.out.println(codigoCurso + "\n" + nome + "\n");
 			}
 			return cursos;
-
-//		System.out.println("-------------------------------------");
 	}
 	
 	public static ArrayList<Docente> lePlanilhaDocentes(File arq) throws NumberFormatException, IOException, RepeatedCodeException{	
@@ -197,11 +193,8 @@ public class LePlanilha {
 				
 				//insere na lista
 				atividadesGrad.add(grad);
-				//printa pra teste
-//				System.out.println(codigoDocente + "\n" + matriculaDiscente + "\n" + codigoCursoDiscente + "\n" + cargaHorariaSemananal + "\n");
 			}
 			return atividadesGrad;
-//		System.out.println("-------------------------------------");
 	}
 	
 	public static ArrayList<Disciplina> lePlanilhaDisciplinas(File arq) throws NumberFormatException, IOException, RepeatedCodeException{
@@ -228,7 +221,7 @@ public class LePlanilha {
 				Disciplina disciplina = new Disciplina(codigoDisciplina, nomeDisciplina, codigoDocente, cargaHorariaSemanal, cargaHorariaSemestral, codigoCurso);
 				
 				//verifica conflitos na disciplina 
-				//TODO ainda falta outras comparaï¿½oes
+				//TODO ainda falta outras comparacoes
 				for (Disciplina d : disciplinas) {
 					if(disciplina.compareCodigoDisciplina(d) == true)
 						throw new RepeatedCodeException(codigoDisciplina, disciplina);
@@ -236,11 +229,7 @@ public class LePlanilha {
 				
 				//adiciona na lista
 				disciplinas.add(disciplina);
-				//printa pra teste
-//				System.out.println(codigoDisciplina + "\n" + nomeDisciplina + "\n" + codigoDocente + "\n" + cargaHorariaSemanal + "\n" + cargaHorariaSemestral + "\n" + codigoCurso + "\n");
-
 		}
-//		System.out.println("-------------------------------------");
 			return disciplinas;
 	}
 	
@@ -273,13 +262,8 @@ public class LePlanilha {
 				
 				//adiciona na lista de atividades de pos graduacao
 				atividadesPos.add(posGrad);
-				
-				//print pra teste
-//				System.out.println(codigoDocente + "\n" + matriculaDiscente + "\n" + programa + "\n" + cargaSemanal + "\n");
 			}
-			return atividadesPos;
-//		System.out.println("-------------------------------------");
-				
+			return atividadesPos;	
 	}
 	
 	public static ArrayList<ProducaoCientifica> lePlanilhaProducaoCientifica(File arq) throws NumberFormatException, IOException{
@@ -304,11 +288,8 @@ public class LePlanilha {
 				//instancia objeto
 				ProducaoCientifica prod = new ProducaoCientifica(codigoDocente, titulo, qualificado);
 				producoes.add(prod);
-				//printa pra teste
-//				System.out.println(codigoDocente + "\n" + titulo + "\n" + qualificado + "\n");
 			}
 			return producoes;
-//		System.out.println("-------------------------------------");
 	}
 	
 	
