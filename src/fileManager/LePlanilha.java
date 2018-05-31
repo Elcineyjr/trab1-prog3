@@ -117,7 +117,7 @@ public class LePlanilha {
 		return alunos;
 	}
 	
-	public static ArrayList<Curso> lePlanilhaCursos(File arq)throws IOException, CourseLevelException {
+	public static ArrayList<Curso> lePlanilhaCursos(File arq)throws IOException, CourseLevelException, RepeatedCodeException {
 		String[] linhaLida = new String[4];
 		
 		ArrayList<Curso> cursos = new ArrayList<Curso>();
@@ -158,9 +158,18 @@ public class LePlanilha {
 				}				
 				
 				//instancia objeto
-				Curso curso = new Curso(codigoCurso, nome, tipoCurso);
+				Curso novoCurso = new Curso(codigoCurso, nome, tipoCurso);
+				//verifica se mesmo código de curso foi utilizado para dois cursos diferentes
+				//TODO testar isso com o contains dps
+				for (Curso curso : cursos) {
+					if(novoCurso.compareTo(curso))
+						throw new RepeatedCodeException(codigoCurso, novoCurso);
+				}
+				//adiciona codigo do curso num array de codigos para posterior uso
 				codigosCursosList.add(codigoCurso);
-				cursos.add(curso);
+				
+				//adiciona novo curso na lista de cursos
+				cursos.add(novoCurso);
 			}
 			return cursos;
 	}
@@ -194,7 +203,7 @@ public class LePlanilha {
 			return docentes;
 	}
 	
-	public static ArrayList<AtividadeOrientadaDiscenteGraduacao> lePlanilhaOrientacaoGrad(File arq) throws NumberFormatException, IOException, RepeatedCodeException{
+	public static ArrayList<AtividadeOrientadaDiscenteGraduacao> lePlanilhaOrientacaoGrad(File arq) throws NumberFormatException, IOException, RepeatedCodeException, DocenteOrientacaoInvalidCodeException, CursoOrientacaoInvalidCodeException{
 		String[] linhaLida = null;
 		ArrayList<AtividadeOrientadaDiscenteGraduacao> atividadesGrad = new ArrayList<AtividadeOrientadaDiscenteGraduacao>();
 			BufferedReader br = new BufferedReader(new FileReader(arq));
@@ -203,9 +212,17 @@ public class LePlanilha {
 				int codigoDoDocente = Integer.parseInt(linhaLida[0]);
 				
 				//matricula nao pode exceder o max int value
-				int matriculaDoDiscente = Integer.parseInt(linhaLida[1]);
+				long matriculaDoDiscente = Long.parseLong(linhaLida[1]);
 				
+				//verifica se codigo de docente é valido
+				if(!codigosDocentesList.contains(codigoDoDocente))
+					throw new DocenteOrientacaoInvalidCodeException(codigoDoDocente, Discente.getDiscentePorMatricula(discentesList, matriculaDoDiscente).getNome());
+
 				int codigoDoCursoDiscente = Integer.parseInt(linhaLida[2]);
+				
+				//testa se o codigo do curso é valido
+				if(!codigosCursosList.contains(codigoDoCursoDiscente))
+					throw new CursoOrientacaoInvalidCodeException(codigoDoCursoDiscente, Discente.getDiscentePorMatricula(discentesList, matriculaDoDiscente).getNome());
 				
 				int cargaHorariaSemanal = Integer.parseInt(linhaLida[3]);
 				
@@ -226,43 +243,50 @@ public class LePlanilha {
 			return atividadesGrad;
 	}
 	
-	public static ArrayList<Disciplina> lePlanilhaDisciplinas(File arq) throws NumberFormatException, IOException, RepeatedCodeException{
+	public static ArrayList<Disciplina> lePlanilhaDisciplinas(File arq) throws NumberFormatException, IOException, RepeatedCodeException, DocenteDisciplinaInvalidCodeException, CursoDisciplinaInvalidCodeException{
 		String[] linhaLida = null;
 		ArrayList<Disciplina> disciplinas = new ArrayList<Disciplina>();
-			BufferedReader br = new BufferedReader(new FileReader(arq)); // abre arquivo
-			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha 
-				
-				//codigo alfanumerico da disciplina
-				String codigoDisciplina = linhaLida[0];
-				
-				//nome da disciplina
-				String nomeDisciplina = linhaLida[1];
-				
-				int codigoDocente = Integer.parseInt(linhaLida[2]);
-				
-				int cargaHorariaSemanal = Integer.parseInt(linhaLida[3]);
-				
-				int cargaHorariaSemestral = Integer.parseInt(linhaLida[4]);
-				
-				int codigoCurso = Integer.parseInt(linhaLida[5]);
-				
-				//instancia o objeto
-				Disciplina disciplina = new Disciplina(codigoDisciplina, nomeDisciplina, codigoDocente, cargaHorariaSemanal, cargaHorariaSemestral, codigoCurso);
-				
-				//verifica conflitos na disciplina 
-				//TODO ainda falta outras comparacoes
-				for (Disciplina d : disciplinas) {
-					if(disciplina.compareCodigoDisciplina(d) == true)
-						throw new RepeatedCodeException(codigoDisciplina, disciplina);
-				}
-				
-				//adiciona na lista
-				disciplinas.add(disciplina);
+		BufferedReader br = new BufferedReader(new FileReader(arq)); // abre arquivo
+		while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha 
+			
+			//codigo alfanumerico da disciplina
+			String codigoDisciplina = linhaLida[0];
+			
+			//nome da disciplina
+			String nomeDisciplina = linhaLida[1];
+			
+			int codigoDocente = Integer.parseInt(linhaLida[2]);
+			
+			//testa se o codigo do docente é valido
+			if(!codigosDocentesList.contains(codigoDocente))
+				throw new DocenteDisciplinaInvalidCodeException(codigoDocente, nomeDisciplina);
+			
+			int cargaHorariaSemanal = Integer.parseInt(linhaLida[3]);
+			
+			int cargaHorariaSemestral = Integer.parseInt(linhaLida[4]);
+			
+			int codigoCurso = Integer.parseInt(linhaLida[5]);
+			
+			if(!codigosCursosList.contains(codigoCurso))
+				throw new CursoDisciplinaInvalidCodeException(codigoCurso, nomeDisciplina);
+			
+			//instancia o objeto
+			Disciplina disciplina = new Disciplina(codigoDisciplina, nomeDisciplina, codigoDocente, cargaHorariaSemanal, cargaHorariaSemestral, codigoCurso);
+			
+			//verifica conflitos na disciplina 
+			//TODO ainda falta outras comparacoes
+			for (Disciplina d : disciplinas) {
+				if(disciplina.compareCodigoDisciplina(d) == true)
+					throw new RepeatedCodeException(codigoDisciplina, disciplina);
+			}
+			
+			//adiciona na lista
+			disciplinas.add(disciplina);
 		}
 			return disciplinas;
 	}
 	
-	public static ArrayList<AtividadeOrientadaDiscentePosGraduacao> lePlanilhaOrientacaoPos(File arq) throws NumberFormatException, IOException, InvalidFutureDateException{
+	public static ArrayList<AtividadeOrientadaDiscentePosGraduacao> lePlanilhaOrientacaoPos(File arq) throws NumberFormatException, IOException, InvalidFutureDateException, DocenteOrientacaoInvalidCodeException{
 		String[] linhaLida = null;
 		ArrayList<AtividadeOrientadaDiscentePosGraduacao> atividadesPos = new ArrayList<AtividadeOrientadaDiscentePosGraduacao>();
 		BufferedReader br = new BufferedReader(new FileReader(arq)); //abre arquivo
@@ -272,6 +296,10 @@ public class LePlanilha {
 				
 				//matricula nao pode exceder o max int value
 				long matriculaDiscente = Long.parseLong(linhaLida[1]); 
+				
+				//verifica se codigo de docente é valido
+				if(!codigosDocentesList.contains(codigoDocente))
+					throw new DocenteOrientacaoInvalidCodeException(codigoDocente, Discente.getDiscentePorMatricula(discentesList, matriculaDiscente).getNome());
 				
 				//estabalece o formato q a data sera recebida
 				DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -283,7 +311,7 @@ public class LePlanilha {
 					throw new InvalidFutureDateException(aluno.getNome(), dataIngressoDiscente);
 				}
 				
-				String programa = linhaLida[3];
+				String programa = linhaLida[3];								
 				
 				int cargaSemanal = Integer.parseInt(linhaLida[4]);
 				
@@ -296,7 +324,7 @@ public class LePlanilha {
 			return atividadesPos;	
 	}
 	
-	public static ArrayList<ProducaoCientifica> lePlanilhaProducaoCientifica(File arq) throws NumberFormatException, IOException{
+	public static ArrayList<ProducaoCientifica> lePlanilhaProducaoCientifica(File arq) throws NumberFormatException, IOException, DocenteProducaoInvalidCodeException{
 		String[] linhaLida = null;
 		ArrayList<ProducaoCientifica> producoes = new ArrayList<ProducaoCientifica>();
 		//try(BufferedReader br = new BufferedReader(new FileReader(arq))){	//abre arquivo
@@ -307,9 +335,14 @@ public class LePlanilha {
 				//converte o codigo lido pra inteiro
 				int codigoDocente = Integer.parseInt(linhaLida[0]);
 				
+				
 				String titulo = linhaLida[1];
 				
-				boolean qualificado;
+				//testa se o codigo do docente é valido
+				if(!codigosDocentesList.contains(codigoDocente))
+					throw new DocenteProducaoInvalidCodeException(codigoDocente, titulo);
+
+					boolean qualificado;
 				if (linhaLida.length == 3)
 					qualificado = verificaCheckbox(linhaLida[2]);
 				else

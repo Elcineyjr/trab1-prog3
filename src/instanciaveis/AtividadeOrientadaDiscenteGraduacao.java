@@ -2,11 +2,11 @@ package instanciaveis;
 
 public class AtividadeOrientadaDiscenteGraduacao {
 	private int codigoDoDocente;
-	private int matriculaDoDiscente;
+	private long matriculaDoDiscente;
 	private int codigoDoCurso;
 	private int cargaHorariaSemanal;
 	
-	public AtividadeOrientadaDiscenteGraduacao(int codigoDoDocente, int matriculaDoDiscente, int codigoDoCurso,
+	public AtividadeOrientadaDiscenteGraduacao(int codigoDoDocente, long matriculaDoDiscente, int codigoDoCurso,
 			int cargaHorariaSemanal) {
 		super();
 		this.codigoDoDocente = codigoDoDocente;
@@ -18,7 +18,7 @@ public class AtividadeOrientadaDiscenteGraduacao {
 	public int getCodigoDoDocente() {
 		return codigoDoDocente;
 	}
-	public int getMatriculaDoDiscente() {
+	public long getMatriculaDoDiscente() {
 		return matriculaDoDiscente;
 	}
 	public int getcodigoDoCurso() {

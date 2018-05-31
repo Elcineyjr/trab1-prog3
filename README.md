@@ -3,18 +3,18 @@
 tabela de erros:
 1-ok
 2-ok (tirar duvida)
-3-TODO
+3-ok
 4-ok
-5-TODO
-6-TODO
-7-TODO
-8-TODO
-9-TODO
+5-ok
+6-ok
+7-ok
+8-ok
+9-ok
 10-ok
 11-ok
 
 
-Primeiro trabalho pratico da discioplina ProgramaÃ§Ã£o 3
+Primeiro trabalho pratico da discioplina Programação 3
 
 Classes de erros:
 --------------------------------Erros que retornam "Código repetido para <objeto>: <código>."----------------------------------------
