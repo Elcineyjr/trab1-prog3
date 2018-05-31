@@ -1,5 +1,6 @@
 package instanciaveis;
 
+import java.util.ArrayList;
 
 public class Discente {
 	private long matricula;
@@ -22,6 +23,14 @@ public class Discente {
 
 	public int getCodigoDoCurso() {
 		return codigoDoCurso;
+	}
+	
+	public static Discente getDiscentePorMatricula(ArrayList<Discente> discentes, long matricula) {
+		for (Discente aluno : discentes) {
+			if(aluno.getMatricula() == matricula)
+				return aluno;
+		}
+		return null;
 	}
 
 	@Override

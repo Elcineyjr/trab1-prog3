@@ -4,14 +4,14 @@ import java.time.format.DateTimeFormatter;
 
 public class AtividadeOrientadaDiscentePosGraduacao {
 	private int codigoDocente;
-	private int matriculaDiscente;
+	private long matriculaDiscente;
 	private LocalDate dataIngressoDiscente; //mudanca pra LocalDate, uma versao melhorada de datas do java 8
 	private String programa;
 	private int cargaHorariaSemanal;
 	
 	DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
-	public AtividadeOrientadaDiscentePosGraduacao(int codigoDocente, int matriculaDiscente, LocalDate dataIngressoDiscente,
+	public AtividadeOrientadaDiscentePosGraduacao(int codigoDocente, long matriculaDiscente, LocalDate dataIngressoDiscente,
 			String programa, int cargaHorariaSemanal) {
 		this.codigoDocente = codigoDocente;
 		this.matriculaDiscente = matriculaDiscente;
@@ -24,7 +24,7 @@ public class AtividadeOrientadaDiscentePosGraduacao {
 		return codigoDocente;
 	}
 	
-	public int getMatriculaDiscente() {
+	public long getMatriculaDiscente() {
 		return matriculaDiscente;
 	}
 	

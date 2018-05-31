@@ -13,6 +13,10 @@ import instanciaveis.*;
 
 
 public class LePlanilha {
+	private static ArrayList<Integer> codigosDocentesList;
+	private static ArrayList<Integer> codigosCursosList;
+	private static ArrayList<Discente> discentesList = new ArrayList<Discente>(); 
+	
 	
 	public static void selectPlanilha(File arq, String flag) throws NumberFormatException, IOException,RepeatedCodeException, InvalidCodeException, CourseLevelException, InvalidFutureDateException{
 			
@@ -89,13 +93,15 @@ public class LePlanilha {
 				//adiciona o aluno na lista
 				alunos.add(aluno);
 			}
+			discentesList = alunos;
 		return alunos;
 	}
 	
 	public static ArrayList<Curso> lePlanilhaCursos(File arq)throws IOException, CourseLevelException {
 		String[] linhaLida = new String[4];
-
+		
 		ArrayList<Curso> cursos = new ArrayList<Curso>();
+		codigosCursosList = new ArrayList<Integer>();
 		BufferedReader br = new BufferedReader(new FileReader(arq)); //abre arquivo
 			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha  
 				//converte o codigo lido pra inteiro
@@ -133,17 +139,18 @@ public class LePlanilha {
 				
 				//instancia objeto
 				Curso curso = new Curso(codigoCurso, nome, tipoCurso);
+				codigosCursosList.add(codigoCurso);
 				cursos.add(curso);
-				//printa pra teste
-//				System.out.println(codigoCurso + "\n" + nome + "\n");
+
 			}
 			return cursos;
 
-//		System.out.println("-------------------------------------");
+
 	}
 	
 	public static ArrayList<Docente> lePlanilhaDocentes(File arq) throws NumberFormatException, IOException, RepeatedCodeException{	
 		String[] linhaLida = null;
+		codigosDocentesList = new ArrayList<Integer>();
 		ArrayList<Docente> docentes = new ArrayList<Docente>();
 		BufferedReader br = new BufferedReader(new FileReader(arq));//abre arquivo
 			while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha 
@@ -164,7 +171,8 @@ public class LePlanilha {
 				}
 				
 				//adiciona na lista de docentes
-				docentes.add(docente);
+				codigosDocentesList.add(codigo);
+				docentes.add(docente);			
 			}
 			return docentes;
 	}
@@ -253,16 +261,17 @@ public class LePlanilha {
 				int codigoDocente = Integer.parseInt(linhaLida[0]);
 				
 				//matricula nao pode exceder o max int value
-				int matriculaDiscente = Integer.parseInt(linhaLida[1]); 
+				long matriculaDiscente = Long.parseLong(linhaLida[1]); 
 				
 				//estabalece o formato q a data sera recebida
 				DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 				
 				LocalDate dataIngressoDiscente = LocalDate.parse(linhaLida[2], formatador);
-				
-				//TODO verificar essa parada de pegar o nome do discente
-//				if(dataIngressoDiscente.isAfter(LocalDate.now()) == true)
-//					throw new InvalidFutureDateException(nomeDiscente, dataIngressoDiscente);
+							
+				if(dataIngressoDiscente.isAfter(LocalDate.now()) == true) {
+					Discente aluno = Discente.getDiscentePorMatricula(discentesList, matriculaDiscente);
+					throw new InvalidFutureDateException(aluno.getNome(), dataIngressoDiscente);
+				}
 				
 				String programa = linhaLida[3];
 				

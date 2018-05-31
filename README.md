@@ -11,7 +11,7 @@ tabela de erros:
 8-TODO
 9-TODO
 10-ok
-11-TODO
+11-ok
 
 
 Primeiro trabalho pratico da discioplina Programação 3
