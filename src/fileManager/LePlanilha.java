@@ -15,9 +15,49 @@ import instanciaveis.*;
 public class LePlanilha {
 	private static ArrayList<Integer> codigosDocentesList;
 	private static ArrayList<Integer> codigosCursosList;
-	private static ArrayList<Discente> discentesList = new ArrayList<Discente>();
+	private static ArrayList<Discente> discentes;
+	private static ArrayList<Curso> cursos;
+	private static ArrayList<Docente> docentes;
+	private static ArrayList<AtividadeOrientadaDiscenteGraduacao> atividadesGrad;
+	private static ArrayList<AtividadeOrientadaDiscentePosGraduacao> atividadesPos;
+	private static ArrayList<Disciplina> disciplinas;
+	private static ArrayList<ProducaoCientifica> producoes;
+	
+	public ArrayList<Docente> getDocentes(){
+		return docentes;
+	}
 	
 	
+	public static ArrayList<Discente> getDiscentes() {
+		return discentes;
+	}
+
+
+	public static ArrayList<Curso> getCursos() {
+		return cursos;
+	}
+
+
+	public static ArrayList<AtividadeOrientadaDiscenteGraduacao> getAtividadesGrad() {
+		return atividadesGrad;
+	}
+
+
+	public static ArrayList<AtividadeOrientadaDiscentePosGraduacao> getAtividadesPos() {
+		return atividadesPos;
+	}
+
+
+	public static ArrayList<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+
+	public static ArrayList<ProducaoCientifica> getProducoes() {
+		return producoes;
+	}
+
+
 	public static void selectPlanilha(String[] args) throws NumberFormatException, IOException,RepeatedCodeException, InvalidCodeException, CourseLevelException, InvalidFutureDateException{
 		File arq = null;
 		String flag = null;
@@ -28,19 +68,19 @@ public class LePlanilha {
 
 			switch(flag) {
 			case "-d": //docentes
-				ArrayList<Docente> docentes = lePlanilhaDocentes(arq);
+				docentes = lePlanilhaDocentes(arq);
 				for (Docente professor: docentes) {
 					System.out.println(professor);
 				}
 				break;
 			case "-a": // discentes
-				ArrayList<Discente> discentes = lePlanilhaDiscentes(arq);
+				discentes = lePlanilhaDiscentes(arq);
 				for (Discente aluno: discentes) {
 					System.out.println(aluno);
 				}
 				break;
 			case "-c": //cursos
-				ArrayList<Curso> cursos = lePlanilhaCursos(arq);
+				cursos = lePlanilhaCursos(arq);
 				for (Curso curso : cursos) {
 					System.out.println(curso);
 				}
@@ -61,26 +101,26 @@ public class LePlanilha {
 		}
 		
 		//producoes
-		ArrayList<ProducaoCientifica> producoes = lePlanilhaProducaoCientifica(arquivos[0]);
+		producoes = lePlanilhaProducaoCientifica(arquivos[0]);
 		for (ProducaoCientifica producaoCientifica : producoes) {
 			System.out.println(producaoCientifica);
 		}
 		
 		//disciplinas
-		ArrayList<Disciplina> disciplinas = lePlanilhaDisciplinas(arquivos[1]);
+		disciplinas = lePlanilhaDisciplinas(arquivos[1]);
 		for (Disciplina disciplina : disciplinas) {
 			System.out.println(disciplina);
 		}
 		
 		//Orientação Grad
-		ArrayList<AtividadeOrientadaDiscenteGraduacao> atividadesGrad = lePlanilhaOrientacaoGrad(arquivos[2]);
+		atividadesGrad = lePlanilhaOrientacaoGrad(arquivos[2]);
 		for (AtividadeOrientadaDiscenteGraduacao atividadeOrientadaDiscenteGraduacao : atividadesGrad) {
 			System.out.println(atividadeOrientadaDiscenteGraduacao);
 		}
 		
 		//Orientação Pos Grad
-		ArrayList<AtividadeOrientadaDiscentePosGraduacao> atividadesPosGrad = lePlanilhaOrientacaoPos(arquivos[3]);
-		for (AtividadeOrientadaDiscentePosGraduacao atividadeOrientadaDiscentePosGraduacao : atividadesPosGrad) {
+		atividadesPos = lePlanilhaOrientacaoPos(arquivos[3]);
+		for (AtividadeOrientadaDiscentePosGraduacao atividadeOrientadaDiscentePosGraduacao : atividadesPos) {
 			System.out.println(atividadeOrientadaDiscentePosGraduacao);
 		}
 		
@@ -115,7 +155,6 @@ public class LePlanilha {
 			//adiciona o aluno na lista
 			alunos.add(aluno);
 		}
-		discentesList = alunos;
 	return alunos;
 	}
 	
@@ -223,13 +262,13 @@ public class LePlanilha {
 			
 			//verifica se codigo de docente eh valido
 			if(!codigosDocentesList.contains(codigoDoDocente))
-				throw new DocenteOrientacaoInvalidCodeException(codigoDoDocente, Discente.getDiscentePorMatricula(discentesList, matriculaDoDiscente).getNome());
+				throw new DocenteOrientacaoInvalidCodeException(codigoDoDocente, Discente.getDiscentePorMatricula(discentes, matriculaDoDiscente).getNome());
 
 			int codigoDoCursoDiscente = Integer.parseInt(linhaLida[2]);
 			
 			//testa se o codigo do curso eh valido
 			if(!codigosCursosList.contains(codigoDoCursoDiscente))
-				throw new CursoOrientacaoInvalidCodeException(codigoDoCursoDiscente, Discente.getDiscentePorMatricula(discentesList, matriculaDoDiscente).getNome());
+				throw new CursoOrientacaoInvalidCodeException(codigoDoCursoDiscente, Discente.getDiscentePorMatricula(discentes, matriculaDoDiscente).getNome());
 			
 			int cargaHorariaSemanal = Integer.parseInt(linhaLida[3]);
 			
@@ -303,7 +342,7 @@ public class LePlanilha {
 			
 			//verifica se codigo de docente é valido
 			if(!codigosDocentesList.contains(codigoDocente))
-				throw new DocenteOrientacaoInvalidCodeException(codigoDocente, Discente.getDiscentePorMatricula(discentesList, matriculaDiscente).getNome());
+				throw new DocenteOrientacaoInvalidCodeException(codigoDocente, Discente.getDiscentePorMatricula(discentes, matriculaDiscente).getNome());
 			
 			//estabalece o formato q a data sera recebida
 			DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -311,7 +350,7 @@ public class LePlanilha {
 			LocalDate dataIngressoDiscente = LocalDate.parse(linhaLida[2], formatador);
 						
 			if(dataIngressoDiscente.isAfter(LocalDate.now()) == true) {
-				Discente aluno = Discente.getDiscentePorMatricula(discentesList, matriculaDiscente);
+				Discente aluno = Discente.getDiscentePorMatricula(discentes, matriculaDiscente);
 				throw new InvalidFutureDateException(aluno.getNome(), dataIngressoDiscente);
 			}
 			
