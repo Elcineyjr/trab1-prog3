@@ -8,7 +8,7 @@ public class DocenteDisciplinaInvalidCodeException extends InvalidCodeException 
 	
 	@Override
 	public String getMessage() {
-		return "Codigo de docente invalido na disciplina " + nome + ": " + codigo;
+		return "Código de docente inválido na disciplina " + nome + ": " + codigo;
 	}
 
 }

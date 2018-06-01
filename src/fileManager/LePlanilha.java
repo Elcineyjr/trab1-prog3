@@ -90,6 +90,8 @@ public class LePlanilha {
 		ArrayList<Discente> alunos = new ArrayList<Discente>();
 		String[] linhaLida = null;
 		BufferedReader br = new BufferedReader(new FileReader(arq)); //abre arquivo
+		
+		br.readLine(); //ignora primeira linha do arquivo
 		while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha 
 			
 			//matricula nao pode exceder 10 digitos
@@ -123,6 +125,8 @@ public class LePlanilha {
 		ArrayList<Curso> cursos = new ArrayList<Curso>();
 		codigosCursosList = new ArrayList<Integer>();
 		BufferedReader br = new BufferedReader(new FileReader(arq)); //abre arquivo
+		
+		br.readLine(); //ignora primeira linha do arquivo
 		while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha  
 			int tipoCurso = 0;
 			//converte o codigo lido pra inteiro
@@ -178,6 +182,8 @@ public class LePlanilha {
 		codigosDocentesList = new ArrayList<Integer>();
 		ArrayList<Docente> docentes = new ArrayList<Docente>();
 		BufferedReader br = new BufferedReader(new FileReader(arq));//abre arquivo
+		
+		br.readLine(); //ignora primeira linha do arquivo
 		while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha 
 			
 			//converte o codigo lido pra inteiro
@@ -206,6 +212,8 @@ public class LePlanilha {
 		String[] linhaLida = null;
 		ArrayList<AtividadeOrientadaDiscenteGraduacao> atividadesGrad = new ArrayList<AtividadeOrientadaDiscenteGraduacao>();
 		BufferedReader br = new BufferedReader(new FileReader(arq));
+		
+		br.readLine(); //ignora primeira linha do arquivo
 		while((linhaLida = csvReader.leLinhaCSV(br)) != null) {
 			
 			int codigoDoDocente = Integer.parseInt(linhaLida[0]);
@@ -238,6 +246,8 @@ public class LePlanilha {
 		String[] linhaLida = null;
 		ArrayList<Disciplina> disciplinas = new ArrayList<Disciplina>();
 		BufferedReader br = new BufferedReader(new FileReader(arq)); // abre arquivo
+		
+		br.readLine(); //ignora primeira linha do arquivo
 		while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha 
 			
 			//codigo alfanumerico da disciplina
@@ -282,6 +292,8 @@ public class LePlanilha {
 		String[] linhaLida = null;
 		ArrayList<AtividadeOrientadaDiscentePosGraduacao> atividadesPos = new ArrayList<AtividadeOrientadaDiscentePosGraduacao>();
 		BufferedReader br = new BufferedReader(new FileReader(arq)); //abre arquivo
+		
+		br.readLine(); //ignora primeira linha do arquivo
 		while( (linhaLida = csvReader.leLinhaCSV(br)) != null ) {
 			
 			int codigoDocente = Integer.parseInt(linhaLida[0]);
@@ -321,6 +333,7 @@ public class LePlanilha {
 		ArrayList<ProducaoCientifica> producoes = new ArrayList<ProducaoCientifica>();
 		BufferedReader br = new BufferedReader(new FileReader(arq));	//abre arquivo
 	
+		br.readLine(); //ignora primeira linha do arquivo
 		while((linhaLida = csvReader.leLinhaCSV(br)) != null) {		//le linha 
 			
 			//converte o codigo lido pra inteiro
