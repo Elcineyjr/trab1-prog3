@@ -225,15 +225,7 @@ public class LePlanilha {
 			int cargaHorariaSemanal = Integer.parseInt(linhaLida[3]);
 			
 			//instancia o objeto
-			AtividadeOrientadaDiscenteGraduacao grad = new AtividadeOrientadaDiscenteGraduacao(codigoDoDocente, matriculaDoDiscente, codigoDoCursoDiscente, cargaHorariaSemanal);
-			
-			//verifica conflito de codigos de curso
-			for (AtividadeOrientadaDiscenteGraduacao a : atividadesGrad) {
-				if(grad.compareCodigoDocente(a) == true)
-					throw new RepeatedCodeException(codigoDoDocente, grad);
-				if(grad.compareCodigoCurso(a) == true)
-					throw new RepeatedCodeException(codigoDoCursoDiscente, grad);
-			}
+			AtividadeOrientadaDiscenteGraduacao grad = new AtividadeOrientadaDiscenteGraduacao(codigoDoDocente, matriculaDoDiscente, codigoDoCursoDiscente, cargaHorariaSemanal);			
 			
 			//insere na lista
 			atividadesGrad.add(grad);
@@ -280,6 +272,7 @@ public class LePlanilha {
 			
 			//adiciona na lista
 			disciplinas.add(disciplina);
+			System.out.println(disciplina);
 		}
 		return disciplinas;
 	}

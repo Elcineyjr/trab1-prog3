@@ -21,19 +21,4 @@ public class csvReader {
 		}
 		return palavra;
 	}
-	
-	public static boolean hasNextLine(BufferedReader br) {
-		String line = "";
-		
-		try {
-			line = br.readLine();
-		}catch(IOException e) {
-			e.printStackTrace();			
-		}
-		
-		if(line == null) 
-			return false;
-		else
-			return true;
-	}
 }
