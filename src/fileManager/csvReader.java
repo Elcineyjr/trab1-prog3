@@ -4,21 +4,18 @@ import java.io.*;
 
 public class csvReader {
 	
-	public static String[] leLinhaCSV(BufferedReader br) {
+	public static String[] leLinhaCSV(BufferedReader br) throws IOException {
 		String line = "";
 		String csvSplitBy = ";";
 		String[] palavra = null;
 		
-		label: try{
 			
-			if((line = br.readLine()) == null) 
-				break label;
-				
-			//usa o ; como separador 
-			palavra = line.split(csvSplitBy);
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
+		if((line = br.readLine()) == null) 
+			return palavra;
+			
+		//usa o ; como separador 
+		palavra = line.split(csvSplitBy);
+		
 		return palavra;
 	}
 }

@@ -136,16 +136,17 @@ public class LePlanilha {
 			}
 			
 			if(linhaLida.length == 4) { //possivel marcacao de duas opcoes
-				if(linhaLida[2].isEmpty() && linhaLida[3].equalsIgnoreCase("x")) 
-					tipoCurso = 1; // pos graduacao 
-				if (linhaLida[2].equalsIgnoreCase("x") && linhaLida[3].isEmpty())
-					tipoCurso = 0; // graduacao
-				if ((!linhaLida[2].isEmpty() && !linhaLida[2].equalsIgnoreCase("x")) || (!linhaLida[3].isEmpty() && !linhaLida[3].equalsIgnoreCase("x")))
+				if((linhaLida[2].isEmpty() || linhaLida[2].equalsIgnoreCase(" ") ) && linhaLida[3].equalsIgnoreCase("x")) // pos graduacao 
+					tipoCurso = 1;  
+				if (linhaLida[2].equalsIgnoreCase("x") && (linhaLida[3].isEmpty() || linhaLida[3].equalsIgnoreCase(" ") )) // graduacao
+					tipoCurso = 0; 
+				if (linhaLida[2].equalsIgnoreCase("x") && linhaLida[3].equalsIgnoreCase("x")) //ambas foram marcadas com x
+					throw new CourseLevelException(codigoCurso, nome);
+				if (!linhaLida[2].equalsIgnoreCase("x") && !linhaLida[3].equalsIgnoreCase("x")) //ambas foram marcadas mas com algo diferente de x
+					throw new CourseLevelException(codigoCurso, nome);
+				//uma pode ter sido marcada com x, mas a outra foi invalida 
+				if ((!linhaLida[2].isEmpty() && (!linhaLida[2].equalsIgnoreCase("x") && !linhaLida[2].equalsIgnoreCase(" ")) ) || (!linhaLida[3].isEmpty() && (!linhaLida[3].equalsIgnoreCase("x") && !linhaLida[3].equalsIgnoreCase(" ")) )) 
 					throw new NumberFormatException();
-				if (linhaLida[2].equalsIgnoreCase("x") && linhaLida[3].equalsIgnoreCase("x"))
-					throw new CourseLevelException(codigoCurso, nome);
-				if (!linhaLida[2].equalsIgnoreCase("x") && !linhaLida[3].equalsIgnoreCase("x"))
-					throw new CourseLevelException(codigoCurso, nome);
 			}
 			
 
@@ -353,7 +354,7 @@ public class LePlanilha {
 		if(array.length > 1)
 			throw new NumberFormatException();			
 		else
-			if(s.equalsIgnoreCase("x") == false)
+			if(!(s.equalsIgnoreCase("x") || s.equalsIgnoreCase(" ")))
 				throw new NumberFormatException();		
 		
 		return s.equalsIgnoreCase("x");
