@@ -160,11 +160,9 @@ public class LePlanilha {
 			//instancia objeto
 			Curso novoCurso = new Curso(codigoCurso, nome, tipoCurso);
 			//verifica se mesmo código de curso foi utilizado para dois cursos diferentes
-			//TODO testar isso com o contains dps
-			for (Curso curso : cursos) {
-				if(novoCurso.compareTo(curso))
-					throw new RepeatedCodeException(codigoCurso, novoCurso);
-			}
+			if(codigosCursosList.contains(novoCurso.getCodigo()))
+				throw new RepeatedCodeException(codigoCurso, novoCurso);
+			
 			//adiciona codigo do curso num array de codigos para posterior uso
 			codigosCursosList.add(codigoCurso);
 			
