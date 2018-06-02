@@ -34,4 +34,8 @@ public class Docente {
 	public boolean compareTo(Docente d) {
 		return this.codigo == d.getCodigo();
 	}
+	
+	public boolean compareNome(Docente d) {
+		return this.nome.equals(d.getNome());
+	}
 }

@@ -23,7 +23,7 @@ public class LePlanilha {
 	private static ArrayList<Disciplina> disciplinas;
 	private static ArrayList<ProducaoCientifica> producoes;
 	
-	public ArrayList<Docente> getDocentes(){
+	public static ArrayList<Docente> getDocentes(){
 		return docentes;
 	}
 	
