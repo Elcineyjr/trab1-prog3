@@ -9,9 +9,8 @@ import exceptionManager.*;
 public class testadoraCSV {
 
 	public static void main(String[] args) {
-//		File arq = null;
 		ArrayList<PAD> padList;
-		
+		ArrayList<RHA> rhaList;
 		try {			
 				LePlanilha.selectPlanilha(args);
 				
@@ -19,6 +18,10 @@ public class testadoraCSV {
 				padList = PAD.createPadList();
 				for (PAD pad : padList) {
 					System.out.println(pad);
+				}
+				rhaList = RHA.createRhaList();
+				for (RHA rha : rhaList) {
+					System.out.println(rha);
 				}
 		} 
 		catch (RepeatedCodeException | InvalidCodeException | CourseLevelException | InvalidFutureDateException e) {
