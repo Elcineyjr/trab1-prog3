@@ -5,13 +5,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+//import com.sun.tools.javac.code.Attribute.Array;
+
 import instanciaveis.PAD;
 import instanciaveis.RHA;
-
+import instanciaveis.Alocacao;
+import instanciaveis.PPG;
 
 public class CsvWriter {
     public static void printPADIntoFile(ArrayList<PAD> padList) throws IOException{
-        PrintWriter pw = new PrintWriter(new File("pad.csv"));
+        PrintWriter pw = new PrintWriter(new File("1-pad.csv"));
         StringBuilder sb = new StringBuilder();
         sb.append("Docente");
         sb.append(';');
@@ -51,7 +54,7 @@ public class CsvWriter {
     }
     
     public static void printRHAIntoFile(ArrayList<RHA> rhaList) throws IOException{
-        PrintWriter pw = new PrintWriter(new File("rha.csv"));
+        PrintWriter pw = new PrintWriter(new File("2-rha.csv"));
         StringBuilder sb = new StringBuilder();
         sb.append("Departamento");
         sb.append(';');
@@ -76,6 +79,60 @@ public class CsvWriter {
 			sb.append(rha.getTotalHorasSemestraisAulas());												
 		}
 
+        pw.write(sb.toString());
+        pw.close();
+        System.out.println("done!");
+    }
+    
+    public static void printAlocacaoIntoFile(ArrayList<Alocacao> alocacaoList) throws IOException{
+    	 PrintWriter pw = new PrintWriter(new File("3-alocacao.csv"));
+         StringBuilder sb = new StringBuilder();
+         sb.append("Docente");
+         sb.append(';');
+         sb.append("Código");
+         sb.append(';');
+         sb.append("Nome");
+         sb.append(';');
+         sb.append("Carga Horária Semestral");
+         
+         for(Alocacao alocacao : alocacaoList) {
+        	 sb.append('\n');
+        	 sb.append(alocacao.getNomeDocente());
+        	 sb.append(';');
+        	 sb.append(alocacao.getCodigoDisciplina());
+        	 sb.append(';');
+        	 sb.append(alocacao.getNomeDisciplina());
+        	 sb.append(';');
+        	 sb.append(alocacao.getCargaHorariaSemestral());
+         }
+         
+         pw.write(sb.toString());
+         pw.close();
+         System.out.println("done!");
+    }
+    
+    public static void printPPGIntoFile(ArrayList<PPG> ppgList) throws IOException{
+    	PrintWriter pw = new PrintWriter(new File("4-ppg.csv"));
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nome do Programa");
+        sb.append(';');
+        sb.append("Data de Ingresso");
+        sb.append(';');
+        sb.append("Matrícula");
+        sb.append(';');
+        sb.append("Nome");
+        
+        for(PPG ppg : ppgList) {
+        	sb.append('\n');
+        	sb.append(ppg.getNomeProgramaPos());
+        	sb.append(';');
+        	sb.append(ppg.getDataIngressoDiscente());
+        	sb.append(';');
+        	sb.append(ppg.getMatriculaDiscente());
+        	sb.append(';');
+        	sb.append(ppg.getNomeDiscente());
+        }
+        
         pw.write(sb.toString());
         pw.close();
         System.out.println("done!");
