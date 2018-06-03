@@ -19,14 +19,14 @@ public class testadoraCSV {
 				LePlanilha.selectPlanilha(args);
 				
 				
-				padList = PAD.createPadList();
-				CsvWriter.printPADIntoFile(padList);
+//				padList = PAD.createPadList();
+//				CsvWriter.printPADIntoFile(padList);
 				rhaList = RHA.createRhaList();
 				CsvWriter.printRHAIntoFile(rhaList);
-				alocacaoList = Alocacao.createAlocacaoList();
-				CsvWriter.printAlocacaoIntoFile(alocacaoList);
-				ppgList = PPG.createPpgList();
-				CsvWriter.printPPGIntoFile(ppgList);
+//				alocacaoList = Alocacao.createAlocacaoList();
+//				CsvWriter.printAlocacaoIntoFile(alocacaoList);
+//				ppgList = PPG.createPpgList();
+//				CsvWriter.printPPGIntoFile(ppgList);
 				
 		} 
 		catch (RepeatedCodeException | InvalidCodeException | CourseLevelException | InvalidFutureDateException e) {

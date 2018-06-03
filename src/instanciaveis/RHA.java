@@ -52,7 +52,7 @@ public class RHA {
 		return totalHoras;
 	}
 	
-	
+	//TODO arrumar caso q repete o professor por ministrar mais de uma disciplina pro mesmo curso
 	public static ArrayList<RHA> createRhaList(){
 		for(Disciplina disciplina : LePlanilha.getDisciplinas()) {
 			for(Docente docente : LePlanilha.getDocentes()) {
@@ -67,13 +67,32 @@ public class RHA {
 			}
 		}
 		
-		//TODO ordenar primeiro pelo departamento, dps pelo docente e dps por nome do do curso
-		//ordena apenas pelo nome do departamento
 		Collections.sort(rhaList, new Comparator<Object>() {
             public int compare(Object o1, Object o2) {
                 RHA rha1 = (RHA) o1;
                 RHA rha2 = (RHA) o2;
-                return rha1.getNomeDepartamento().compareToIgnoreCase(rha2.getNomeDepartamento());
+                
+                int comparaDepartamento = rha1.getNomeDepartamento().compareToIgnoreCase(rha2.getNomeDepartamento());
+                int comparaDocente = rha1.getNomeDocente().compareToIgnoreCase(rha2.getNomeDocente());
+                int comparaCurso = rha1.getNomeCurso().compareToIgnoreCase(rha2.getNomeCurso());
+                if(comparaDepartamento < 0)
+                	return -1;
+                else
+                	if(comparaDepartamento > 0)
+                		return 1;
+                	else
+                		if(comparaDocente < 0)
+                			return -1;
+                		else
+                			if(comparaDocente > 0)
+                				return 1;
+                			else 
+                				if(comparaCurso < 0)
+                					return -1;
+                				else
+                					if(comparaCurso > 0)
+                						return 1;
+                return 0;
             }
         });
 		
