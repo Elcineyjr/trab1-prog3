@@ -3,6 +3,7 @@ package fileManager;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 //import com.sun.tools.javac.code.Attribute.Array;
@@ -122,11 +123,13 @@ public class CsvWriter {
         sb.append(';');
         sb.append("Nome");
         
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
         for(PPG ppg : ppgList) {
         	sb.append('\n');
         	sb.append(ppg.getNomeProgramaPos());
         	sb.append(';');
-        	sb.append(ppg.getDataIngressoDiscente());
+        	sb.append(formatador.format(ppg.getDataIngressoDiscente()));
         	sb.append(';');
         	sb.append(ppg.getMatriculaDiscente());
         	sb.append(';');
