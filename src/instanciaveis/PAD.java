@@ -22,6 +22,30 @@ public class PAD {
 		return nome;
 	}
 	
+	public String getDepartamento() {
+		return departamento;
+	}
+	
+	public int getTotalHorasSemanaisAulas() {
+		return totalHorasSemanaisAulas;
+	}
+	
+	public int getTotalHorasSemestraisAulas() {
+		return totalHorasSemestraisAulas;
+	}
+	
+	public int getTotalHorasSemanaisOrientacao() {
+		return totalHorasSemanaisOrientacao;
+	}
+	
+	public int getProducoesQualificadas() {
+		return producoesQualificadas;
+	}
+	
+	public int getProducoesNaoQualificadas() {
+		return producoesNaoQualificadas;
+	}
+	
 	public PAD(Docente docente) {
 		this.nome = docente.getNome();
 		this.departamento = docente.getDepartamento();

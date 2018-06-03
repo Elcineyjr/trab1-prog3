@@ -16,13 +16,9 @@ public class testadoraCSV {
 				
 				
 				padList = PAD.createPadList();
-				for (PAD pad : padList) {
-					System.out.println(pad);
-				}
+				CsvWriter.printPADIntoFile(padList);
 				rhaList = RHA.createRhaList();
-				for (RHA rha : rhaList) {
-					System.out.println(rha);
-				}
+				CsvWriter.printRHAIntoFile(rhaList);
 		} 
 		catch (RepeatedCodeException | InvalidCodeException | CourseLevelException | InvalidFutureDateException e) {
 			System.out.println(e.getMessage());

@@ -19,6 +19,14 @@ public class RHA {
 		return nomeDepartamento;
 	}
 
+	public int getCodigoCurso() {
+		return codigoCurso;
+	}
+
+	public int getTotalHorasSemestraisAulas() {
+		return totalHorasSemestraisAulas;
+	}
+
 	public String getNomeDocente() {
 		return nomeDocente;
 	}
