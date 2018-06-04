@@ -51,8 +51,8 @@ public class RHA {
 		}
 		return totalHoras;
 	}
+
 	
-	//TODO arrumar caso q repete o professor por ministrar mais de uma disciplina pro mesmo curso
 	public static ArrayList<RHA> createRhaList(){
 		for(Disciplina disciplina : LePlanilha.getDisciplinas()) {
 			for(Docente docente : LePlanilha.getDocentes()) {
@@ -60,13 +60,15 @@ public class RHA {
 					for(Curso curso : LePlanilha.getCursos()) {
 						if(disciplina.getCodigoDoCurso() == curso.getCodigo()) {
 							RHA rha = new RHA(docente, curso);
-							rhaList.add(rha);
+							if(!RHA.pertenceALista(rha))
+								rhaList.add(rha);
 						}	
 					}
 				}	
 			}
 		}
 		
+		//perguntar professor sobre esse codigo repetido
 		Collections.sort(rhaList, new Comparator<Object>() {
             public int compare(Object o1, Object o2) {
                 RHA rha1 = (RHA) o1;
@@ -98,6 +100,43 @@ public class RHA {
 		
 		return rhaList;
 	}
+	
+	
+	public static boolean pertenceALista(RHA rha) {
+		for(RHA r : rhaList) {
+			if(compara(r, rha) == 0)
+				return true;		
+		}
+		return false;
+	}
+	
+	public static int compara(Object o1, Object o2) {
+        RHA rha1 = (RHA) o1;
+        RHA rha2 = (RHA) o2;
+        
+        int comparaDepartamento = rha1.getNomeDepartamento().compareToIgnoreCase(rha2.getNomeDepartamento());
+        int comparaDocente = rha1.getNomeDocente().compareToIgnoreCase(rha2.getNomeDocente());
+        int comparaCurso = rha1.getNomeCurso().compareToIgnoreCase(rha2.getNomeCurso());
+        if(comparaDepartamento < 0)
+        	return -1;
+        else
+        	if(comparaDepartamento > 0)
+        		return 1;
+        	else
+        		if(comparaDocente < 0)
+        			return -1;
+        		else
+        			if(comparaDocente > 0)
+        				return 1;
+        			else 
+        				if(comparaCurso < 0)
+        					return -1;
+        				else
+        					if(comparaCurso > 0)
+        						return 1;
+        return 0;
+    }
+	
 		
 	@Override
 	public String toString() {

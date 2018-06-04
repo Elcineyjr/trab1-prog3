@@ -57,7 +57,6 @@ public class CsvWriter {
 
         pw.write(sb.toString());
         pw.close();
-        System.out.println("done!");
     }
     
     public static void printRHAIntoFile(ArrayList<RHA> rhaList) throws IOException{
@@ -88,7 +87,6 @@ public class CsvWriter {
 
         pw.write(sb.toString());
         pw.close();
-        System.out.println("done!");
     }
     
     public static void printAlocacaoIntoFile(ArrayList<Alocacao> alocacaoList) throws IOException{
@@ -115,7 +113,6 @@ public class CsvWriter {
          
          pw.write(sb.toString());
          pw.close();
-         System.out.println("done!");
     }
     
     public static void printPPGIntoFile(ArrayList<PPG> ppgList) throws IOException{
@@ -144,7 +141,6 @@ public class CsvWriter {
         
         pw.write(sb.toString());
         pw.close();
-        System.out.println("done!");
     }
     
     public static void generateOutputFiles() throws IOException {

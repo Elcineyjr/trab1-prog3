@@ -69,21 +69,12 @@ public class LePlanilha {
 			switch(flag) {
 			case "-d": //docentes
 				docentes = lePlanilhaDocentes(arq);
-				for (Docente professor: docentes) {
-					System.out.println(professor);
-				}
 				break;
 			case "-a": // discentes
 				discentes = lePlanilhaDiscentes(arq);
-				for (Discente aluno: discentes) {
-					System.out.println(aluno);
-				}
 				break;
 			case "-c": //cursos
 				cursos = lePlanilhaCursos(arq);
-				for (Curso curso : cursos) {
-					System.out.println(curso);
-				}
 				break;
 			case "-p": // producoes
 				arquivos[0] = arq;
@@ -102,27 +93,15 @@ public class LePlanilha {
 		
 		//producoes
 		producoes = lePlanilhaProducaoCientifica(arquivos[0]);
-		for (ProducaoCientifica producaoCientifica : producoes) {
-			System.out.println(producaoCientifica);
-		}
 		
 		//disciplinas
 		disciplinas = lePlanilhaDisciplinas(arquivos[1]);
-		for (Disciplina disciplina : disciplinas) {
-			System.out.println(disciplina);
-		}
 		
 		//Orientação Grad
 		atividadesGrad = lePlanilhaOrientacaoGrad(arquivos[2]);
-		for (AtividadeOrientadaDiscenteGraduacao atividadeOrientadaDiscenteGraduacao : atividadesGrad) {
-			System.out.println(atividadeOrientadaDiscenteGraduacao);
-		}
 		
 		//Orientação Pos Grad
 		atividadesPos = lePlanilhaOrientacaoPos(arquivos[3]);
-		for (AtividadeOrientadaDiscentePosGraduacao atividadeOrientadaDiscentePosGraduacao : atividadesPos) {
-			System.out.println(atividadeOrientadaDiscentePosGraduacao);
-		}
 		
 	}
 	
@@ -322,7 +301,6 @@ public class LePlanilha {
 			
 			//adiciona na lista
 			disciplinas.add(disciplina);
-			System.out.println(disciplina);
 		}
 		return disciplinas;
 	}
