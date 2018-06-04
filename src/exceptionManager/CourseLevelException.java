@@ -4,7 +4,7 @@ public class CourseLevelException extends Exception{
 	private int codigoCurso;
 	private String nome;	
 	public CourseLevelException(int codigoCurso, String nome) {
-		super("Inconsistência ao definir o  nível  do  curso: " + codigoCurso + " - " + nome);
+		super("InconsistÃªncia ao definir o  nÃ­vel  do  curso: " + codigoCurso + " - " + nome + ".");
 		this.codigoCurso = codigoCurso;
 		this.nome = nome;
 	}
