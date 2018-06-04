@@ -13,7 +13,13 @@ import instanciaveis.RHA;
 import instanciaveis.Alocacao;
 import instanciaveis.PPG;
 
+
 public class CsvWriter {
+	private static ArrayList<PAD> padList;
+	private static ArrayList<RHA> rhaList;
+	private static ArrayList<Alocacao> alocacaoList;
+	private static ArrayList<PPG> ppgList;
+	
     public static void printPADIntoFile(ArrayList<PAD> padList) throws IOException{
         PrintWriter pw = new PrintWriter(new File("1-pad.csv"));
         StringBuilder sb = new StringBuilder();
@@ -139,5 +145,16 @@ public class CsvWriter {
         pw.write(sb.toString());
         pw.close();
         System.out.println("done!");
+    }
+    
+    public static void generateOutputFiles() throws IOException {
+    	padList = PAD.createPadList();
+		CsvWriter.printPADIntoFile(padList);
+		rhaList = RHA.createRhaList();
+		CsvWriter.printRHAIntoFile(rhaList);
+		alocacaoList = Alocacao.createAlocacaoList();
+		CsvWriter.printAlocacaoIntoFile(alocacaoList);
+		ppgList = PPG.createPpgList();
+		CsvWriter.printPPGIntoFile(ppgList);
     }
 }

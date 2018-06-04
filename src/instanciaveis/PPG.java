@@ -2,6 +2,8 @@ package instanciaveis;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import fileManager.LePlanilha;
 
@@ -50,6 +52,36 @@ public class PPG {
 				}
 			}
 		}
+		
+		Collections.sort(ppgList, new Comparator<Object>() {
+            public int compare(Object o1, Object o2) {
+                PPG ppg1 = (PPG) o1;
+                PPG ppg2 = (PPG) o2;
+                
+                int comparaNomePrograma = ppg1.getNomeProgramaPos().compareToIgnoreCase(ppg2.getNomeProgramaPos());
+                int comparaDataIngresso = ppg1.getDataIngressoDiscente().compareTo(ppg2.getDataIngressoDiscente());
+                int comparaNomeDiscente = ppg1.getNomeDiscente().compareToIgnoreCase(ppg2.getNomeDiscente());
+                if(comparaNomePrograma < 0)
+                	return -1;
+                else
+                	if(comparaNomePrograma > 0)
+                		return 1;
+                	else
+                		if(comparaDataIngresso < 0)
+                			return -1;
+                		else
+                			if(comparaDataIngresso > 0)
+                				return 1;
+                			else 
+                				if(comparaNomeDiscente < 0)
+                					return -1;
+                				else
+                					if(comparaNomeDiscente > 0)
+                						return 1;
+                return 0;
+            }
+        });
+		
 		return ppgList;
 	}
 

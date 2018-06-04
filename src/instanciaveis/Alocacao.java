@@ -1,6 +1,8 @@
 package instanciaveis;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import fileManager.LePlanilha;
 
@@ -45,6 +47,27 @@ public class Alocacao {
 				}
 			}
 		}
+			Collections.sort(alocacaoList, new Comparator<Object>() {
+	            public int compare(Object o1, Object o2) {
+	                Alocacao alocacao1 = (Alocacao) o1;
+	                Alocacao alocacao2 = (Alocacao) o2;
+	                
+	                int comparaDocente = alocacao1.getNomeDocente().compareToIgnoreCase(alocacao2.getNomeDocente());
+	                int comparaDisciplina = alocacao1.getNomeDisciplina().compareToIgnoreCase(alocacao2.getNomeDisciplina());
+	                if(comparaDocente < 0)
+	                	return -1;
+	                else
+	                	if(comparaDocente > 0)
+	                		return 1;
+	                	else
+	                		if(comparaDisciplina < 0)
+	                			return -1;
+	                		else
+	                			if(comparaDisciplina > 0)
+	                				return 1;
+	                return 0;
+	            }
+	        });
 		return alocacaoList;
 	}
 

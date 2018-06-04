@@ -1,7 +1,4 @@
 Docente;Código;Nome;Carga Horária Semestral
-Marilia Mendonça;001;Disciplina 1;60
-Marilia Mendonça;002;Disciplina 2;80
-Marilia Mendonça;003;Disciplina 3;100
 Caetano Veloso;004;Disciplina 4;60
 Caetano Veloso;005;Disciplina 5;80
 Caetano Veloso;006;Disciplina 6;100
@@ -11,6 +8,9 @@ Fafá de Belem;009;Disciplina 9;100
 Fausto Silva;0010;Disciplina 10;60
 Fausto Silva;0011;Disciplina 11;80
 Fausto Silva;012;Disciplina 12;100
+Marilia Mendonça;001;Disciplina 1;60
+Marilia Mendonça;002;Disciplina 2;80
+Marilia Mendonça;003;Disciplina 3;100
 Silvio Santos;013;Disciplina 13;60
 Silvio Santos;014;Disciplina 14;80
 Silvio Santos;015;Disciplina 15;100
