@@ -15,6 +15,6 @@ public class InvalidFutureDateException extends Exception{
 	@Override
 	public String getMessage() {
 		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		return "Data de ingresso do aluno " + nome + " est· no futuro: " + formatador.format(date) + ".";
+		return "Data de ingresso do aluno " + nome + " est√° no futuro: " + formatador.format(date) + ".";
 	}
 }

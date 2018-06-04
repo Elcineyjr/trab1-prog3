@@ -82,10 +82,10 @@ public class LePlanilha {
 			case "-r": //disciplinas
 				arquivos[1] = arq;
 				break;
-			case "-og": //Orientação Grad
+			case "-og": //OrientaÃ§Ã£o Grad
 				arquivos[2] = arq;
 				break;
-			case "-op": //Orientação Pos Grad
+			case "-op": //OrientaÃ§Ã£o Pos Grad
 				arquivos[3] = arq;
 				break;
 			}			
@@ -97,10 +97,10 @@ public class LePlanilha {
 		//disciplinas
 		disciplinas = lePlanilhaDisciplinas(arquivos[1]);
 		
-		//Orientação Grad
+		//OrientaÃ§Ã£o Grad
 		atividadesGrad = lePlanilhaOrientacaoGrad(arquivos[2]);
 		
-		//Orientação Pos Grad
+		//OrientaÃ§Ã£o Pos Grad
 		atividadesPos = lePlanilhaOrientacaoPos(arquivos[3]);
 		
 	}
@@ -182,7 +182,7 @@ public class LePlanilha {
 			
 			//instancia objeto
 			Curso novoCurso = new Curso(codigoCurso, nome, tipoCurso);
-			//verifica se mesmo código de curso foi utilizado para dois cursos diferentes
+			//verifica se mesmo cÃ³digo de curso foi utilizado para dois cursos diferentes
 			if(codigosCursosList.contains(novoCurso.getCodigo()))
 				throw new RepeatedCodeException(codigoCurso, novoCurso);
 			
@@ -318,7 +318,7 @@ public class LePlanilha {
 			//matricula nao pode exceder o max int value
 			long matriculaDiscente = Long.parseLong(linhaLida[1]); 
 			
-			//verifica se codigo de docente é valido
+			//verifica se codigo de docente Ã© valido
 			if(!codigosDocentesList.contains(codigoDocente))
 				throw new DocenteOrientacaoInvalidCodeException(codigoDocente, Discente.getDiscentePorMatricula(discentes, matriculaDiscente).getNome());
 			

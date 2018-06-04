@@ -8,7 +8,7 @@ public class DocenteOrientacaoInvalidCodeException extends InvalidCodeException 
 	
 	@Override
 	public String getMessage() {
-		return "CÛdigo de docente inv·lido na orientaÁ„o do aluno " + nome + ": " + codigo;
+		return "C√≥digo de docente inv√°lido na orienta√ß√£o do aluno " + nome + ": " + codigo + ".";
 	}
 
 }

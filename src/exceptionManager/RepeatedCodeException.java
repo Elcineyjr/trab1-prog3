@@ -7,13 +7,13 @@ public class RepeatedCodeException extends Exception{
 	private String codigo_;
 	private Object objeto;
 	public RepeatedCodeException(long codigo, Object objeto) {
-		super("Código repetido para " + objeto.getClass().getSimpleName() + ":" + codigo + ".");
+		super("CÃ³digo repetido para " + objeto.getClass().getSimpleName() + ":" + codigo + ".");
 		this.codigo = codigo;
 		this.objeto = objeto;
 	}
 	
 	public RepeatedCodeException(String codigoString, Object objeto) {
-		super("Código repetido para " + objeto.getClass().getSimpleName() + ":" + codigoString + ".");
+		super("CÃ³digo repetido para " + objeto.getClass().getSimpleName() + ":" + codigoString + ".");
 		this.codigo_ = codigoString;
 		this.objeto = objeto;
 	}

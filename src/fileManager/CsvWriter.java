@@ -31,11 +31,11 @@ public class CsvWriter {
         sb.append(';');
         sb.append("Horas Semestrais Aula");
         sb.append(';');
-        sb.append("Horas Semanais Orientação");
+        sb.append("Horas Semanais OrientaÃ§Ã£o");
         sb.append(';');
-        sb.append("Produções Qualificadas");
+        sb.append("ProduÃ§Ãµes Qualificadas");
         sb.append(';');
-        sb.append("Produções Não Qualificadas");
+        sb.append("ProduÃ§Ãµes NÃ£o Qualificadas");
         
         for (PAD pad : padList) {
         	sb.append('\n');
@@ -53,7 +53,8 @@ public class CsvWriter {
 			sb.append(';');
 			sb.append(pad.getProducoesNaoQualificadas());
 			
-		}
+        }
+        sb.append('\n');
 
         pw.write(sb.toString());
         pw.close();
@@ -66,7 +67,7 @@ public class CsvWriter {
         sb.append(';');
         sb.append("Docente");
         sb.append(';');
-        sb.append("Código do Curso");
+        sb.append("CÃ³digo do Curso");
         sb.append(';');
         sb.append("Curso");
         sb.append(';');
@@ -83,7 +84,8 @@ public class CsvWriter {
 			sb.append(rha.getNomeCurso());
 			sb.append(';');
 			sb.append(rha.getTotalHorasSemestraisAulas());												
-		}
+        }
+        sb.append('\n');
 
         pw.write(sb.toString());
         pw.close();
@@ -94,11 +96,11 @@ public class CsvWriter {
          StringBuilder sb = new StringBuilder();
          sb.append("Docente");
          sb.append(';');
-         sb.append("Código");
+         sb.append("CÃ³digo");
          sb.append(';');
          sb.append("Nome");
          sb.append(';');
-         sb.append("Carga Horária Semestral");
+         sb.append("Carga HorÃ¡ria Semestral");
          
          for(Alocacao alocacao : alocacaoList) {
         	 sb.append('\n');
@@ -110,6 +112,7 @@ public class CsvWriter {
         	 sb.append(';');
         	 sb.append(alocacao.getCargaHorariaSemestral());
          }
+         sb.append('\n');
          
          pw.write(sb.toString());
          pw.close();
@@ -122,7 +125,7 @@ public class CsvWriter {
         sb.append(';');
         sb.append("Data de Ingresso");
         sb.append(';');
-        sb.append("Matrícula");
+        sb.append("MatrÃ­cula");
         sb.append(';');
         sb.append("Nome");
         
@@ -138,6 +141,7 @@ public class CsvWriter {
         	sb.append(';');
         	sb.append(ppg.getNomeDiscente());
         }
+        sb.append('\n');
         
         pw.write(sb.toString());
         pw.close();

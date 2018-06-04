@@ -8,7 +8,7 @@ public class DocenteProducaoInvalidCodeException extends InvalidCodeException {
 	
 	@Override
 	public String getMessage() {
-		return "CÛdigo de docente inv·lido na publicaÁ„o " + nome + ": " + codigo;
+		return "C√≥digo de docente inv√°lido na publica√ß√£o " + nome + ": " + codigo + ".";
 	}
 
 }

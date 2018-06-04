@@ -8,7 +8,7 @@ public class CursoDisciplinaInvalidCodeException extends InvalidCodeException {
 	
 	@Override
 	public String getMessage() {
-		return "CÛdigo de curso inv·lido na disciplina " + nome + ": " + codigo;
+		return "C√≥digo de curso inv√°lido na disciplina " + nome + ": " + codigo + ".";
 	}
 
 }

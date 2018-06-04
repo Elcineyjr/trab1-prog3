@@ -29,8 +29,8 @@ public class Curso {
 	@Override
 	public String toString() {
 		if(this.tipoCurso == GRAD)
-			return "Curso [codigo=" + this.codigo +  ", nome=" + this.nome + ", tipo de curso=Graduação" + "]";
-		return "Curso [codigo=" + this.codigo +  ", nome=" + this.nome + ", tipo de curso=Pos-Graduação" + "]";
+			return "Curso [codigo=" + this.codigo +  ", nome=" + this.nome + ", tipo de curso=GraduaÃ§Ã£o" + "]";
+		return "Curso [codigo=" + this.codigo +  ", nome=" + this.nome + ", tipo de curso=Pos-GraduaÃ§Ã£o" + "]";
 		
 	}
 	

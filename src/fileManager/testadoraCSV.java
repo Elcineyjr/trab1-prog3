@@ -1,5 +1,6 @@
 package fileManager;
 
+//import java.util.Locale;
 import java.io.*;
 
 
@@ -8,8 +9,8 @@ import java.io.*;
 import exceptionManager.*;
 
 public class testadoraCSV {
-
 	public static void main(String[] args) {
+	//Locale.setDefault(new Locale("pt", "BR"));
 		try {			
 				LePlanilha.selectPlanilha(args);
 				CsvWriter.generateOutputFiles();								
@@ -19,7 +20,7 @@ public class testadoraCSV {
 			System.out.println(e.getMessage());
 		}
 		catch (NumberFormatException e) {
-			System.out.println("Erro de formatação");
+			System.out.println("Erro de formataÃ§Ã£o");
 		}
 		catch (IOException e) {
 			System.out.println("Erro de I/O");
