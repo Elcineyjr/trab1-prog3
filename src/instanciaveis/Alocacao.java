@@ -53,7 +53,7 @@ public class Alocacao {
 	                Alocacao alocacao2 = (Alocacao) o2;
 	                
 	                int comparaDocente = alocacao1.getNomeDocente().compareToIgnoreCase(alocacao2.getNomeDocente());
-	                int comparaDisciplina = alocacao1.getNomeDisciplina().compareToIgnoreCase(alocacao2.getNomeDisciplina());
+	                int comparaDisciplina = alocacao1.getCodigoDisciplina().compareToIgnoreCase(alocacao2.getCodigoDisciplina());
 	                if(comparaDocente < 0)
 	                	return -1;
 	                else

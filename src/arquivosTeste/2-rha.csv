@@ -1,21 +1,25 @@
-Departamento;Docente;C�digo do Curso;Curso;Horas Semestrais Aula
-Departamento de Artes;Caetano Veloso;2;Arquitetura;80
-Departamento de Artes;Caetano Veloso;1;Ciência da Computação;60
-Departamento de Artes;Caetano Veloso;3;Engenharia Civil;100
-Departamento de Ciências Humanas;Fausto Silva;6;Admnistração Portuária;100
-Departamento de Ciências Humanas;Fausto Silva;4;Direito;60
-Departamento de Ciências Humanas;Fausto Silva;5;Engenharia de Software;80
-Departamento de Engenharia;Faf� de Belem;6;Admnistração Portuária;100
-Departamento de Engenharia;Faf� de Belem;4;Direito;60
-Departamento de Engenharia;Faf� de Belem;5;Engenharia de Software;80
-Departamento de Informática;Marilia Mendon�a;2;Arquitetura;80
-Departamento de Informática;Marilia Mendon�a;1;Ciência da Computação;60
-Departamento de Informática;Marilia Mendon�a;3;Engenharia Civil;100
-Departamento de Informática;Silvio Santos;2;Arquitetura;100
-Departamento de Informática;Silvio Santos;1;Ciência da Computação;200
-Departamento de Informática;Silvio Santos;11;Contabilidade;240
-Departamento de Informática;Silvio Santos;8;Engenharia Ambiental;80
-Departamento de Informática;Silvio Santos;3;Engenharia Civil;100
-Departamento de Informática;Silvio Santos;10;Engenharia dos Materiais;180
-Departamento de Informática;Silvio Santos;9;Oceanografia;100
-Departamento de Informática;Silvio Santos;7;Urbanismo;60
+Departamento;Docente;Cód. Curso;Curso;Horas Semestrais Aula
+Departamento de Artes;Juliano Jurassa Neto;159;Artes Cenicas;105
+Departamento de Artes;Juliano Jurassa Neto;154;Artes Visuais;60
+Departamento de Artes;Juliano Jurassa Neto;240;Mestrado Acadêmico em Artes;60
+Departamento de Artes;Juliano Jurassa Neto;100;Psicologia;60
+Departamento de Artes;Margarida Oliveira de Souza;159;Artes Cenicas;90
+Departamento de Artes;Margarida Oliveira de Souza;154;Artes Visuais;60
+Departamento de Artes;Margarida Oliveira de Souza;194;Cinema;75
+Departamento de Artes;Margarida Oliveira de Souza;312;Doutorado em Arquitetura e Urbanismo;60
+Departamento de Artes;Margarida Oliveira de Souza;240;Mestrado Acadêmico em Artes;60
+Departamento de Ciencias Exatas;Antonio Feijo;134;Economia;75
+Departamento de Ciencias Exatas;Antonio Feijo;175;Fisica;150
+Departamento de Ciencias Exatas;Antonio Feijo;114;Matematica;180
+Departamento de Ciencias Exatas;Antonio Feijo;222;Mestrado Acadêmico em Matemática;150
+Departamento de Ciencias Humanas;Pedro Henrique Felisberto;144;Direito;135
+Departamento de Ciencias Humanas;Pedro Henrique Felisberto;307;Doutorado em Sistemas de Informacao;120
+Departamento de Ciencias Humanas;Pedro Henrique Felisberto;134;Economia;60
+Departamento de Ciencias Humanas;Pedro Henrique Felisberto;109;Filosofia;60
+Departamento de Ciencias Humanas;Pedro Henrique Felisberto;105;Historia;120
+Departamento de Ciencias Humanas;Pedro Henrique Felisberto;256;Mestrado em Comunicação e Territorialidades;135
+Departamento de Ciencias Humanas;Pedro Henrique Felisberto;100;Psicologia;60
+Departamento de Informatica;Giselda Arruda;184;Ciencia da Computacao;75
+Departamento de Informatica;Miguel Lisboa;184;Ciencia da Computacao;75
+Departamento de Informatica;Miguel Lisboa;176;Engenharia de Computacao;75
+Departamento de Informatica;Miguel Lisboa;103;Sistemas de Informacao;120

@@ -67,7 +67,7 @@ public class CsvWriter {
         sb.append(';');
         sb.append("Docente");
         sb.append(';');
-        sb.append("Código do Curso");
+        sb.append("Cód. Curso");
         sb.append(';');
         sb.append("Curso");
         sb.append(';');

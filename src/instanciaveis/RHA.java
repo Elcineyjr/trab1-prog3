@@ -75,7 +75,7 @@ public class RHA {
                 RHA rha2 = (RHA) o2;
                 
                 int comparaDepartamento = rha1.getNomeDepartamento().compareToIgnoreCase(rha2.getNomeDepartamento());
-                int comparaDocente = rha1.getNomeDocente().compareToIgnoreCase(rha2.getNomeDocente());
+                int comparaDocente = rha1.getNomeDocente().compareTo(rha2.getNomeDocente());
                 int comparaCurso = rha1.getNomeCurso().compareToIgnoreCase(rha2.getNomeCurso());
                 if(comparaDepartamento < 0)
                 	return -1;
